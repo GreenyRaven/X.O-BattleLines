@@ -1,6 +1,8 @@
+import View.Main_Board;
+
 public class Prime {
 
     public static void main (String[] args) {
-        System.out.print("Launch completed");
+        View.Main_Board view = new Main_Board();
     }
 }
