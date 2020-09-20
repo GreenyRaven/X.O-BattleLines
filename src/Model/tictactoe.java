@@ -8,24 +8,40 @@ public class tictactoe {
     public static void main(String[] args) {
         System.out.println("start");
 
-        //Random random = new Random();
-        //random.setSeed(1);
-
-        //System.out.println(random.nextInt(2)+1);
 
         int[][] board = Create_board();
+        System.out.println("Поле:");
         System.out.println(Arrays.deepToString(board));
+        System.out.println("----------");
 
         Place(board,1, 2, 1);
-        Place(board,2, 0, 2);
+        System.out.println("Ход первого:");
         System.out.println(Arrays.deepToString(board));
+        System.out.println("----------");
 
+        Place(board,2, 0, 2);
+        System.out.println("Ход второго:");
+        System.out.println(Arrays.deepToString(board));
+        System.out.println("----------");
+
+        //demo
         ArrayList<int[]> possibilities = Possibilities(board);
+        System.out.println("Возможные ходы");
         System.out.println(Arrays.deepToString(possibilities.toArray()));
+        System.out.println("----------");
+        //demo
+
+        Random_placement(board,1);
+        System.out.println("Случайный ход первого игрока");//убрать сид!
+        System.out.println(Arrays.deepToString(board));
+        System.out.println("----------");
+
+
 
         System.out.println("end");
     }
 
+    //3x3
     public static int[][] Create_board(){
         int[][] arr = new int[3][3];
         return arr;
@@ -49,8 +65,16 @@ public class tictactoe {
         return possibilities;
     }
 
-//    public static void Check_win(){
-//
-//    }
+    //случайный ход выбранного игрока
+    public static void Random_placement(int[][] board, int player){
+        ArrayList<int[]> possibilities = Possibilities(board);
+        if (possibilities.isEmpty() == false){
+            Random random = new Random();
+            random.setSeed(1);// убрать сид
+            int[] position = possibilities.get(random.nextInt(possibilities.size()));//[0,0]
+            Place(board,player,position[0],position[1]);
+        }
+    }
+    
 
 }
