@@ -1,4 +1,4 @@
-package Controller;
+package ModelView;
 
 public class Existence {
 }
