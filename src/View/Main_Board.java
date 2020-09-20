@@ -1,4 +1,6 @@
 package View;
+import ModelView.CardCollection;
+
 import javax.swing.*;
 import java.util.Objects;
 
@@ -79,9 +81,11 @@ public class Main_Board extends JFrame{
         launchButton.setVisible(false);
         if (gametype.equals("3x3")) {
             setLabelVisibility("3x3",true,true);
+            ModelView.CardCollection gameBoard = new CardCollection("3x3");
         }
         if (gametype.equals("6x6")) {
             setLabelVisibility("6x6",true,true);
+            ModelView.CardCollection gameBoard = new CardCollection("6x6");
         }
         pack();
     }

@@ -3,20 +3,20 @@ package ModelView;
 import java.awt.*;
 
 public class CardCollection {
-    public Card[] gameboard;
+    public Card[] cardCollection;
 
     public CardCollection (String gametype) {
         switch (gametype) {
             case "3x3" -> {
-                gameboard = new Card[9];
+                cardCollection = new Card[9];
                 for (int i=0;i<9;i++) {
-                    gameboard[i] = new Card(i,null);
+                    cardCollection[i] = new Card(i,null);
                 }
             }
             case "6x6" -> {
-                gameboard = new Card[36];
+                cardCollection = new Card[36];
                 for (int i=0;i<36;i++) {
-                    gameboard[i] = new Card(i,null);
+                    cardCollection[i] = new Card(i,null);
                 }
             }
         }
