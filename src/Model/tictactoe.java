@@ -1,11 +1,11 @@
 package Model;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
-import java.lang.reflect.Array;
 
 public class tictactoe {
-    public static void start() {
+    public static void main(String[] args) {
         System.out.println("start");
 
         //Random random = new Random();
@@ -20,8 +20,8 @@ public class tictactoe {
         Place(board,2, 0, 2);
         System.out.println(Arrays.deepToString(board));
 
-        ArrayList<Integer[][]> possibilities = Possibilities(board);
-        System.out.println(possibilities);
+        ArrayList<int[]> possibilities = Possibilities(board);
+        System.out.println(Arrays.deepToString(possibilities.toArray()));
 
         System.out.println("end");
     }
@@ -37,14 +37,12 @@ public class tictactoe {
     }
 
     // можно проверять по кнопкам / можно проверять по массиву
-    public static ArrayList<Integer[][]> Possibilities(int[][] board){
-        ArrayList<Integer[][]> possibilities = new ArrayList<>();
-        //System.out.println(board.length);
+    public static ArrayList<int[]> Possibilities(int[][] board){
+        ArrayList<int[]> possibilities = new ArrayList<>();
         for (int i = 0; i < board.length; i++){
-            for (int j = 0; j < board[i].length; i++){
-                //System.out.println(board[i][j]);
+            for (int j = 0; j < board[i].length; j++){
                 if (board[i][j] == 0){
-                    possibilities.add(new Integer[i][j]);//[i,j],[i2,j2]
+                    possibilities.add(new int[]{i,j});
                 }
             }
         }
