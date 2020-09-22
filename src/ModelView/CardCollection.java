@@ -3,31 +3,36 @@ package ModelView;
 import java.awt.*;
 
 public class CardCollection {
-    public Card[] cardCollection;
+    private Card[] cardCollection;
 
     public CardCollection (String gametype) {
         switch (gametype) {
             case "3x3" -> {
                 cardCollection = new Card[9];
-                for (int i=0;i<9;i++) {
-                    cardCollection[i] = new Card(i,null);
+                for (int i = 0; i < 9; i++) {
+                    cardCollection[i] = new Card(i, null);
                 }
             }
             case "6x6" -> {
                 cardCollection = new Card[36];
-                for (int i=0;i<36;i++) {
-                    cardCollection[i] = new Card(i,null);
+                for (int i = 0; i < 36; i++) {
+                    cardCollection[i] = new Card(i, null);
                 }
             }
         }
     }
-    class Card {
+
+    protected Card[] getCardCollection() {
+        return cardCollection;
+    }
+
+    public class Card {
         private final int index;
         private boolean pushed;
         private Image cardIcon;
         private String iconType;
 
-        public Card (int index, Image baseImage) {
+        protected Card (int index, Image baseImage) {
             this.index = index;
             setCardIcon(baseImage);
             setPushed(false);
@@ -38,11 +43,11 @@ public class CardCollection {
             return index;
         }
 
-        public boolean isPushed() {
+        protected boolean isPushed() {
             return pushed;
         }
 
-        public void setPushed(boolean pushed) {
+        protected void setPushed(boolean pushed) {
             this.pushed = pushed;
             if (pushed) {
                 //set new image, lock this Card object
@@ -55,15 +60,15 @@ public class CardCollection {
             return cardIcon;
         }
 
-        public void setCardIcon(Image cardIcon) {
+        protected void setCardIcon(Image cardIcon) {
             this.cardIcon = cardIcon;
         }
 
-        public String getIconType() {
+        protected String getIconType() {
             return iconType;
         }
 
-        public void setIconType(String iconType) {
+        protected void setIconType(String iconType) {
             this.iconType = iconType;
         }
     }
