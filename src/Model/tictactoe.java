@@ -8,35 +8,44 @@ public class tictactoe {
     public static void main(String[] args) {
         System.out.println("start");
 
-
         int[][] board = Create_board();
         System.out.println("Поле:");
         System.out.println(Arrays.deepToString(board));
         System.out.println("----------");
 
-        Place(board,1, 2, 1);
-        System.out.println("Ход первого:");
-        System.out.println(Arrays.deepToString(board));
-        System.out.println("----------");
+        int[] players = {1,2,1,2,1,2,1,2,1};
+        int turn = 0;
 
-        Place(board,2, 0, 2);
-        System.out.println("Ход второго:");
-        System.out.println(Arrays.deepToString(board));
-        System.out.println("----------");
+        for (int player : players ){
+            System.out.println("Ход: " + turn++);
 
-        //demo
-        ArrayList<int[]> possibilities = Possibilities(board);
-        System.out.println("Возможные ходы");
-        System.out.println(Arrays.deepToString(possibilities.toArray()));
-        System.out.println("----------");
-        //demo
+            //Place(board,2, 2, 2);
+            //Place(board,1, 0, 1);
+            //Place(board,2, 0, 2);
 
-        Random_placement(board,1);
-        System.out.println("Случайный ход первого игрока");//убрать сид!
-        System.out.println(Arrays.deepToString(board));
-        System.out.println("----------");
+            //demo
+            ArrayList<int[]> possibilities = Possibilities(board);
+            System.out.println("@@@@@@@@@@@");
+            System.out.println("Возможные ходы:");
+            System.out.println(Arrays.deepToString(possibilities.toArray()));
+            System.out.println("@@@@@@@@@@@");
+            //demo
 
+            Random_placement(board, player);
+            System.out.println("Случайный ход:");//убрать сид!
+            System.out.println(Arrays.deepToString(board));
+            System.out.println("----------");
 
+            // по нажатию кнопки должно быть размещение и проверка на победу(после 5ого хода)
+            if (Win_check(board,player)){
+                System.out.println("Player " + player + " won!");
+                break;
+            }
+            else if (Possibilities(board).isEmpty()){
+                System.out.println("No one won!");
+                break;
+            }
+        }
 
         System.out.println("end");
     }
@@ -48,6 +57,7 @@ public class tictactoe {
     }
 
     // номер кнопки ->(преобразуется) в координаты row=2,col=1 и т.д.
+    // сделать ход
     public static void Place(int[][] board, int player, int row, int col){
         board[row][col] = player;
     }
@@ -70,11 +80,41 @@ public class tictactoe {
         ArrayList<int[]> possibilities = Possibilities(board);
         if (possibilities.isEmpty() == false){
             Random random = new Random();
-            random.setSeed(1);// убрать сид
-            int[] position = possibilities.get(random.nextInt(possibilities.size()));//[0,0]
+            random.setSeed(2);// убрать сид
+            int[] position = possibilities.get(random.nextInt(possibilities.size()));//[1,2]
             Place(board,player,position[0],position[1]);
         }
     }
-    
 
+    // проверка победы
+    public static boolean Win_check(int[][] board, int player){
+        // горизонталь
+        for (int numrow = 0; numrow < board.length; numrow++){
+            int[] row = board[numrow];
+            int count = 0;
+            for(int value : row){
+                if (value == player){
+                    count++;
+                    if(count == 3){
+                        return true;
+                    }
+                }
+            }
+        }
+        // вертикаль
+        for(int numcol = 0; numcol < board[0].length; numcol++) {
+            int count = 0;
+            for (int numrow = 0; numrow < board.length; numrow++) {
+                int[] row = board[numrow];
+                int value = row[numcol];
+                if (value == player){
+                    count++;
+                    if (count == 3){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
 }
