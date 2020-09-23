@@ -1,53 +1,51 @@
 package ModelView;
 
+import javax.swing.*;
 import java.awt.*;
 
-public class CardCollection {
-    private Card[] cardCollection;
+public final class CardCollection {
+    static CardCollection GameBoard;
+    private Card[] CardCollection;
 
-    public CardCollection (String gametype) {
+    CardCollection (String gametype, JLabel[] labelCollection) {
         switch (gametype) {
             case "3x3" -> {
-                cardCollection = new Card[9];
+                CardCollection = new Card[9];
                 for (int i = 0; i < 9; i++) {
-                    cardCollection[i] = new Card(i, null);
+                    CardCollection[i] = new Card(null, labelCollection[i]);
                 }
             }
             case "6x6" -> {
-                cardCollection = new Card[36];
+                CardCollection = new Card[36];
                 for (int i = 0; i < 36; i++) {
-                    cardCollection[i] = new Card(i, null);
+                    CardCollection[i] = new Card(null, labelCollection[i]);
                 }
             }
         }
     }
 
-    protected Card[] getCardCollection() {
-        return cardCollection;
+    public Card[] getCardCollection() {
+        return CardCollection;
     }
 
-    public class Card {
-        private final int index;
+    public final class Card {
         private boolean pushed;
         private Image cardIcon;
         private String iconType;
+        private JLabel capsule;
 
-        protected Card (int index, Image baseImage) {
-            this.index = index;
+        Card (Image baseImage, JLabel capsule) {
             setCardIcon(baseImage);
             setPushed(false);
             setIconType("blank");
+            setCapsule(capsule);
         }
 
-        public int getIndex() {
-            return index;
-        }
-
-        protected boolean isPushed() {
+        public boolean isPushed() {
             return pushed;
         }
 
-        protected void setPushed(boolean pushed) {
+        void setPushed(boolean pushed) {
             this.pushed = pushed;
             if (pushed) {
                 //set new image, lock this Card object
@@ -60,16 +58,24 @@ public class CardCollection {
             return cardIcon;
         }
 
-        protected void setCardIcon(Image cardIcon) {
+        void setCardIcon(Image cardIcon) {
             this.cardIcon = cardIcon;
         }
 
-        protected String getIconType() {
+        public String getIconType() {
             return iconType;
         }
 
-        protected void setIconType(String iconType) {
+        void setIconType(String iconType) {
             this.iconType = iconType;
+        }
+
+        public JLabel getCapsule() {
+            return capsule;
+        }
+
+        private void setCapsule(JLabel capsule) {
+            this.capsule = capsule;
         }
     }
 }
