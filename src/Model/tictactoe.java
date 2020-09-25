@@ -15,36 +15,41 @@ public class tictactoe {
         System.out.println("----------");
     }
 
-    public static void main(String[] args) {
-        System.out.println("start");
-
-        tictactoe Game = new tictactoe();
-//        //demo
-//        ArrayList<int[]> possibilities = Possibilities(board);
-//        System.out.println("@@@@@@@@@@@");
-//        System.out.println("Возможные ходы:");
-//        System.out.println(Arrays.deepToString(possibilities.toArray()));
-//        System.out.println("@@@@@@@@@@@");
-//        //demo
+//    public static void main(String[] args) {
+//        System.out.println("start");
 //
-//        Random_placement(board, player);
-//        System.out.println("Случайный ход:");//убрать сид!
-//        System.out.println(Arrays.deepToString(board));
-//        System.out.println("----------");
-//        move = Make_a_move(board,player, row, col);
-        // test
-        Game.make_a_move();
-        // test
+//        tictactoe Game = new tictactoe();
+////        //demo
+////        ArrayList<int[]> possibilities = Possibilities(board);
+////        System.out.println("@@@@@@@@@@@");
+////        System.out.println("Возможные ходы:");
+////        System.out.println(Arrays.deepToString(possibilities.toArray()));
+////        System.out.println("@@@@@@@@@@@");
+////        //demo
+////
+////        Random_placement(board, player);
+////        System.out.println("Случайный ход:");//убрать сид!
+////        System.out.println(Arrays.deepToString(board));
+////        System.out.println("----------");
+////        move = Make_a_move(board,player, row, col);
+//        // test
+//        Game.make_a_move();
+//        // test
+//
+//        System.out.println("end");
+//    }
 
-        System.out.println("end");
-    }
+//    // test
+//    private void make_a_move(){
+//        move = Make_a_move(board,1,0,0);
+//        System.out.println("Row: " + move[0]+ " Col: " + move[1]);
+//    }
+//    // test
 
-    // test
-    private void make_a_move(){
-        move = Make_a_move(board,1,0,0);
-        System.out.println("Row: " + move[0]+ " Col: " + move[1]);
+    public String test(){
+        String greeting = "IT'S ME, TEST!";
+        return greeting;
     }
-    // test
 
     private void Turn(int index, String figure){
         int player = 0;
