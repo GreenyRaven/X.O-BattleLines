@@ -3,12 +3,12 @@ package ModelView;
 public class ViewUpdater {
     //transports Model results to the View
     //updates CardCollection using accumulated Model results
-    public void commitTransfer() {
+    public void toNextStep() {
     }
 
-    private void toModel() {
+    private void endThisGame() {
     }
 
-    private void toCardCollection() {
+    private void showMessage() {
     }
 }

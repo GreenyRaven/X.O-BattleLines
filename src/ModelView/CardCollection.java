@@ -24,7 +24,7 @@ public final class CardCollection {
         }
     }
 
-    public Card[] getCardCollection() {
+    Card[] getCardCollection() {
         return CardCollection;
     }
 

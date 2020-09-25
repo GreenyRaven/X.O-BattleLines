@@ -8,7 +8,7 @@ public class tictactoe {
     private int[] move;
     private int[][] board;
 
-    tictactoe(){
+    public tictactoe(){
         board = Create_board();
         System.out.println("Поле:");
         System.out.println(Arrays.deepToString(board));
