@@ -99,7 +99,6 @@ public class tictactoe {
                 col=2;
                 break;
         }
-
         System.out.println("Row: " + move[0]+ " Col: " + move[1]);
     }
 
@@ -129,6 +128,7 @@ public class tictactoe {
         if (!possibilities.isEmpty()){
             Random random = new Random();
             random.setSeed(2);// delete seed
+
             int[] position = possibilities.get(random.nextInt(possibilities.size()));//[1,2]
             Place(board,player,position[0],position[1]);
         }
@@ -142,6 +142,7 @@ public class tictactoe {
                 if (value == player) {
                     count++;
                     if (count == 3) {
+   
                         return true;
                     }
                 }
