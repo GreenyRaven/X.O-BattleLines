@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class tictactoe {
-    private int[] move;
     private int[][] board;
 
     public tictactoe(){
@@ -99,7 +98,7 @@ public class tictactoe {
                 col=2;
                 break;
         }
-        System.out.println("Row: " + move[0]+ " Col: " + move[1]);
+        System.out.println("Row: " + row+ " Col: " + col);
     }
 
     //3x3
@@ -197,7 +196,7 @@ public class tictactoe {
         return false;
     }
 
-    private int[] Make_a_move(int[][] board, int player, int row, int col){
+    private void Make_a_move(int[][] board, int player, int row, int col){
         //int turn = 0;
         //System.out.println("Номер хода: " + turn);
         Place(board, player, row, col);
@@ -210,7 +209,5 @@ public class tictactoe {
         else if (Possibilities(board).isEmpty()){
             System.out.println("No one won!");
         }
-        int [] move = {row, col};
-        return move;
     }
 }
