@@ -55,6 +55,7 @@ public class Main_Board extends JFrame {
     private JLabel gameStep;
 
     ModelNotifier ModelNotifier;
+    private boolean locked = false;
 
     public Main_Board() {
         getContentPane().add(main_panel);
@@ -67,14 +68,19 @@ public class Main_Board extends JFrame {
     }
 
     private void sendData(JLabel affectedLabel) {
-        if (gameStep.getText().equals("Нолики")) {
-            ModelNotifier.commitTransfer(affectedLabel, gameStep.getText());
-            gameStep.setText("Крестики");
-        } else {
-            ModelNotifier.commitTransfer(affectedLabel, gameStep.getText());
-            gameStep.setText("Нолики");
+        if (!locked) {
+            if (gameStep.getText().equals("Нолики")) {
+                ModelNotifier.commitTransfer(affectedLabel, gameStep.getText());
+                gameStep.setText("Крестики");
+                locked = true;
+            } else {
+                ModelNotifier.commitTransfer(affectedLabel, gameStep.getText());
+                gameStep.setText("Нолики");
+                locked = true;
+            }
         }
     }
+
 
     private JLabel[] returnLabelCollection() {
         JLabel[] labelCollection = new JLabel[36];

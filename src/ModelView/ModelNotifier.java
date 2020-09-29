@@ -26,5 +26,10 @@ public class ModelNotifier {
     }
 
     private void toCardCollection(JLabel affectedLabel, String gameStep) {
+        for (CardCollection.Card card : GameBoard.getCardCollection()) {
+            if (card.getCapsule().equals(affectedLabel)) {
+                GameBoard.updateCards(new CardCollection.Card[]{card}, gameStep);
+            }
+        }
     }
 }
