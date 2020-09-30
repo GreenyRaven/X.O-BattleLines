@@ -55,17 +55,29 @@ public class Main_Board extends JFrame {
     private JPanel westGamePanel;
     private JPanel eastGamePanel;
     private JLabel gameStep;
+    private JButton newGameButton;
+    private JLabel winnerLabel;
+    private JPanel endGamePanel;
+    private JLabel step;
+    private JLabel nullWinCountLabel;
+    private JLabel crossWinCountLabel;
 
     ModelNotifier ModelNotifier;
     ViewUpdater UIUpdater;
     private boolean locked = false;
+    private int crossWinCount = 0;
+    private int nullWinCount = 0;
 
     public Main_Board() {
         getContentPane().add(main_panel);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLabelVisibility("6x6", false, false);
         setLabelListeners();
+        step.setVisible(false);
+        gameStep.setVisible(false);
+        endGamePanel.setVisible(false);
         launchButton.addActionListener(e -> setGameBoard((String) Objects.requireNonNull(gametypeBox.getSelectedItem())));
+        newGameButton.addActionListener(e -> newGame());
         pack();
         setVisible(true);
     }
@@ -75,9 +87,28 @@ public class Main_Board extends JFrame {
     }
 
     public void endGame() {
+        if (gameStep.getText().equals("Нолики")) {
+            winnerLabel.setText("Победа за нулями!");
+            nullWinCount++;
+            nullWinCountLabel.setText(String.valueOf(nullWinCount));
+        } else {
+            winnerLabel.setText("Победа за крестами!");
+            crossWinCount++;
+            crossWinCountLabel.setText(String.valueOf(crossWinCount));
+        }
+        pack();
+        endGamePanel.setVisible(true);
     }
-
-    public void showMessage() {
+    private void newGame() {
+        //операции по старту новой игры
+        //
+        //
+        //со стороны Main_Board:
+        endGamePanel.setVisible(false);
+        setLabelVisibility("6x6", false, false);
+        controlPanel.setVisible(true);
+        locked = false;
+        pack();
     }
 
     private void sendData(JLabel affectedLabel) {
@@ -146,15 +177,6 @@ public class Main_Board extends JFrame {
         labelCollection[6] = s_31;
         labelCollection[7] = s_32;
         labelCollection[8] = s_33;
-        labelCollection[9] = s_41;
-        labelCollection[10] = s_42;
-        labelCollection[11] = s_43;
-        labelCollection[12] = s_51;
-        labelCollection[13] = s_52;
-        labelCollection[14] = s_53;
-        labelCollection[15] = s_61;
-        labelCollection[16] = s_62;
-        labelCollection[17] = s_63;
         return labelCollection;
     }
 
@@ -193,6 +215,11 @@ public class Main_Board extends JFrame {
 
     private void setGameBoard(String gametype) {
         controlPanel.setVisible(false);
+        endGamePanel.setVisible(false);
+        crossWinCountLabel.setText("0");
+        nullWinCountLabel.setText("0");
+        step.setVisible(true);
+        gameStep.setVisible(true);
         switch (gametype) {
             case "3x3" -> {
                 setLabelVisibility("3x3", true, true);

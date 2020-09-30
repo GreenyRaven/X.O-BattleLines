@@ -79,7 +79,7 @@ public final class CardCollection {
             return iconType;
         }
 
-        private void setIconType(String iconType) {
+        void setIconType(String iconType) {
             this.iconType = iconType;
             try {
                 setCardIcon(ImageIO.read(new File(iconType + ".png")));
@@ -101,7 +101,7 @@ public final class CardCollection {
             return index;
         }
 
-         private void setIndex(int index) {
+        private void setIndex(int index) {
             this.index = index;
         }
     }

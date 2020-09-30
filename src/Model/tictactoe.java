@@ -50,6 +50,8 @@ public class tictactoe {
 
     public String test(int index, String gamestep, ViewUpdater UIUpdater){
         String greeting = "IT'S ME, TEST!";
+        UIUpdater.toNextStep();
+        UIUpdater.endThisGame(new int[]{1, 2, 3}, "winCross1");
         return greeting;
     }
 
