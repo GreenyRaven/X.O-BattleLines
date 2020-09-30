@@ -18,10 +18,20 @@ public class ModelNotifier {
         this.UIUpdater = UIUpdater;
     }
 
+    public void startNewGame() {
+        GameLogic = new tictactoe();
+        GameBoard.updateCards(GameBoard.getCardCollection(), "blank");
+    }
+
     public void commitTransfer(JLabel affectedLabel, String gameStep) {
         int indexOfCard = findCardIndexByLabel(affectedLabel);
-        toModel(indexOfCard, gameStep, UIUpdater);
-        toCardCollection(indexOfCard, gameStep);
+        try {
+            if (!GameBoard.getCardCollection()[indexOfCard].isPushed()) {
+                toModel(indexOfCard, gameStep, UIUpdater);
+                toCardCollection(indexOfCard, gameStep);
+            }
+        } catch (Exception ignored) {
+        }
     }
 
     private void toModel(int index, String gameStep, ViewUpdater UIUpdater) {

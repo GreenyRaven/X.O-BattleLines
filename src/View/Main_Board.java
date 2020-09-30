@@ -67,6 +67,8 @@ public class Main_Board extends JFrame {
     private boolean locked = false;
     private int crossWinCount = 0;
     private int nullWinCount = 0;
+    private String gametype;
+    private String gameDifficulty;
 
     public Main_Board() {
         getContentPane().add(main_panel);
@@ -102,11 +104,12 @@ public class Main_Board extends JFrame {
     private void newGame() {
         //операции по старту новой игры
         //
+        ModelNotifier.startNewGame();
         //
         //со стороны Main_Board:
         endGamePanel.setVisible(false);
-        setLabelVisibility("6x6", false, false);
-        controlPanel.setVisible(true);
+        setLabelVisibility(gametype, true, true);
+        controlPanel.setVisible(false);
         locked = false;
         pack();
     }
@@ -214,6 +217,8 @@ public class Main_Board extends JFrame {
     }
 
     private void setGameBoard(String gametype) {
+        this.gametype = gametype;
+        gameDifficulty = (String) gamediffBox.getSelectedItem();
         controlPanel.setVisible(false);
         endGamePanel.setVisible(false);
         crossWinCountLabel.setText("0");
