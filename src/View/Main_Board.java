@@ -1,5 +1,7 @@
 package View;
+
 import ModelView.ModelNotifier;
+import ModelView.ViewUpdater;
 
 import javax.swing.*;
 import java.awt.event.MouseEvent;
@@ -55,6 +57,7 @@ public class Main_Board extends JFrame {
     private JLabel gameStep;
 
     ModelNotifier ModelNotifier;
+    ViewUpdater UIUpdater;
     private boolean locked = false;
 
     public Main_Board() {
@@ -65,6 +68,16 @@ public class Main_Board extends JFrame {
         launchButton.addActionListener(e -> setGameBoard((String) Objects.requireNonNull(gametypeBox.getSelectedItem())));
         pack();
         setVisible(true);
+    }
+
+    public void nextStep() {
+        locked = false;
+    }
+
+    public void endGame() {
+    }
+
+    public void showMessage() {
     }
 
     private void sendData(JLabel affectedLabel) {
@@ -82,7 +95,7 @@ public class Main_Board extends JFrame {
     }
 
 
-    private JLabel[] returnLabelCollection() {
+    private JLabel[] returnFullLabelCollection() {
         JLabel[] labelCollection = new JLabel[36];
         labelCollection[0] = s_11;
         labelCollection[1] = s_12;
@@ -122,6 +135,28 @@ public class Main_Board extends JFrame {
         labelCollection[35] = s_66;
         return labelCollection;
     }
+    private JLabel[] returnBasicLabelCollection () {
+        JLabel[] labelCollection = new JLabel[9];
+        labelCollection[0] = s_11;
+        labelCollection[1] = s_12;
+        labelCollection[2] = s_13;
+        labelCollection[3] = s_21;
+        labelCollection[4] = s_22;
+        labelCollection[5] = s_23;
+        labelCollection[6] = s_31;
+        labelCollection[7] = s_32;
+        labelCollection[8] = s_33;
+        labelCollection[9] = s_41;
+        labelCollection[10] = s_42;
+        labelCollection[11] = s_43;
+        labelCollection[12] = s_51;
+        labelCollection[13] = s_52;
+        labelCollection[14] = s_53;
+        labelCollection[15] = s_61;
+        labelCollection[16] = s_62;
+        labelCollection[17] = s_63;
+        return labelCollection;
+    }
 
     private void setLabelListeners() {
         MouseListener listener = new MouseListener() {
@@ -150,7 +185,7 @@ public class Main_Board extends JFrame {
 
             }
         };
-        JLabel[] labelCollection = returnLabelCollection();
+        JLabel[] labelCollection = returnFullLabelCollection();
         for (JLabel jLabel : labelCollection) {
             jLabel.addMouseListener(listener);
         }
@@ -161,11 +196,13 @@ public class Main_Board extends JFrame {
         switch (gametype) {
             case "3x3" -> {
                 setLabelVisibility("3x3", true, true);
-                ModelNotifier = new ModelNotifier("3x3", returnLabelCollection());
+                UIUpdater = new ViewUpdater(this);
+                ModelNotifier = new ModelNotifier("3x3", returnBasicLabelCollection(), UIUpdater);
             }
             case "6x6" -> {
                 setLabelVisibility("6x6", true, true);
-                ModelNotifier = new ModelNotifier("6x6", returnLabelCollection());
+                UIUpdater = new ViewUpdater(this);
+                ModelNotifier = new ModelNotifier("6x6", returnFullLabelCollection(), UIUpdater);
             }
         }
         pack();

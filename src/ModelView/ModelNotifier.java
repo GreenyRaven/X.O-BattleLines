@@ -8,28 +8,36 @@ import static ModelView.CardCollection.GameBoard;
 
 public class ModelNotifier {
     private Model.tictactoe GameLogic;
+    private ViewUpdater UIUpdater;
     //transports View data to the Model
     //updates CardCollection using View data
 
-    public ModelNotifier(String gametype, JLabel[] labelCollection) {
+    public ModelNotifier(String gametype, JLabel[] labelCollection, ViewUpdater UIUpdater) {
         GameBoard = new CardCollection(gametype, labelCollection);
         GameLogic = new tictactoe();
+        this.UIUpdater = UIUpdater;
     }
 
     public void commitTransfer(JLabel affectedLabel, String gameStep) {
-        toModel(GameBoard, affectedLabel, gameStep);
-        toCardCollection(affectedLabel, gameStep);
+        int indexOfCard = findCardIndexByLabel(affectedLabel);
+        toModel(indexOfCard, gameStep, UIUpdater);
+        toCardCollection(indexOfCard, gameStep);
     }
 
-    private void toModel(CardCollection GameBoard, JLabel affectedLabel, String gameStep) {
-        GameLogic.test();
+    private void toModel(int index, String gameStep, ViewUpdater UIUpdater) {
+        GameLogic.test(index, gameStep, UIUpdater);
     }
 
-    private void toCardCollection(JLabel affectedLabel, String gameStep) {
+    private void toCardCollection(int desiredIndex, String gameStep) {
+        GameBoard.updateCards(new CardCollection.Card[]{GameBoard.getCardCollection()[desiredIndex]}, gameStep);
+    }
+
+    private int findCardIndexByLabel(JLabel affectedLabel) {
         for (CardCollection.Card card : GameBoard.getCardCollection()) {
             if (card.getCapsule().equals(affectedLabel)) {
-                GameBoard.updateCards(new CardCollection.Card[]{card}, gameStep);
+                return card.getIndex();
             }
         }
+        return 0;
     }
 }

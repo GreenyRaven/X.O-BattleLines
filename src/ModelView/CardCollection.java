@@ -15,13 +15,13 @@ public final class CardCollection {
             case "3x3" -> {
                 CardCollection = new Card[9];
                 for (int i = 0; i < 9; i++) {
-                    CardCollection[i] = new Card(labelCollection[i]);
+                    CardCollection[i] = new Card(labelCollection[i], i);
                 }
             }
             case "6x6" -> {
                 CardCollection = new Card[36];
                 for (int i = 0; i < 36; i++) {
-                    CardCollection[i] = new Card(labelCollection[i]);
+                    CardCollection[i] = new Card(labelCollection[i], i);
                 }
             }
         }
@@ -50,9 +50,11 @@ public final class CardCollection {
         private Image cardIcon;
         private String iconType;
         private JLabel capsule;
+        private int index;
 
-        Card(JLabel capsule) {
+        Card(JLabel capsule, int index) {
             setIconType("blank");
+            setIndex(index);
             setCapsule(capsule);
         }
 
@@ -77,7 +79,7 @@ public final class CardCollection {
             return iconType;
         }
 
-        void setIconType(String iconType) {
+        private void setIconType(String iconType) {
             this.iconType = iconType;
             try {
                 setCardIcon(ImageIO.read(new File(iconType + ".png")));
@@ -93,6 +95,14 @@ public final class CardCollection {
 
         private void setCapsule(JLabel capsule) {
             this.capsule = capsule;
+        }
+
+        int getIndex() {
+            return index;
+        }
+
+         private void setIndex(int index) {
+            this.index = index;
         }
     }
 }
