@@ -7,71 +7,9 @@
     <properties/>
     <border type="none"/>
     <children>
-      <grid id="37802" binding="controlPanel" layout-manager="GridBagLayout">
-        <constraints>
-          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-          <gridbag weightx="0.0" weighty="0.0"/>
-        </constraints>
-        <properties/>
-        <border type="none"/>
-        <children>
-          <component id="f66c" class="javax.swing.JLabel">
-            <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
-              <gridbag weightx="0.0" weighty="0.0"/>
-            </constraints>
-            <properties>
-              <text value="Режим игры:"/>
-            </properties>
-          </component>
-          <component id="1d558" class="javax.swing.JComboBox" binding="gametypeBox">
-            <constraints>
-              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
-              <gridbag weightx="0.0" weighty="0.0"/>
-            </constraints>
-            <properties>
-              <model>
-                <item value="3x3"/>
-                <item value="6x6"/>
-              </model>
-            </properties>
-          </component>
-          <component id="14663" class="javax.swing.JLabel">
-            <constraints>
-              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
-              <gridbag weightx="0.0" weighty="0.0"/>
-            </constraints>
-            <properties>
-              <text value="Сложность:"/>
-            </properties>
-          </component>
-          <component id="acb7b" class="javax.swing.JComboBox" binding="gamediffBox">
-            <constraints>
-              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
-              <gridbag weightx="0.0" weighty="0.0"/>
-            </constraints>
-            <properties>
-              <model>
-                <item value="Low"/>
-                <item value="Medium"/>
-                <item value="High"/>
-              </model>
-            </properties>
-          </component>
-          <component id="1d1b4" class="javax.swing.JButton" binding="launchButton">
-            <constraints>
-              <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-              <gridbag weightx="0.0" weighty="0.0"/>
-            </constraints>
-            <properties>
-              <text value="Начать игру"/>
-            </properties>
-          </component>
-        </children>
-      </grid>
       <grid id="23353" binding="baseGamePanel" layout-manager="GridBagLayout">
         <constraints>
-          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <gridbag weightx="0.0" weighty="0.0"/>
         </constraints>
         <properties/>
@@ -198,7 +136,7 @@
       </grid>
       <grid id="169bb" binding="northGamePanel" layout-manager="GridBagLayout">
         <constraints>
-          <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <gridbag weightx="0.0" weighty="0.0"/>
         </constraints>
         <properties/>
@@ -319,7 +257,7 @@
       </grid>
       <grid id="262fd" binding="westGamePanel" layout-manager="GridBagLayout">
         <constraints>
-          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <gridbag weightx="0.0" weighty="0.0"/>
         </constraints>
         <properties/>
@@ -440,7 +378,7 @@
       </grid>
       <grid id="ce0dc" binding="eastGamePanel" layout-manager="GridBagLayout">
         <constraints>
-          <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <gridbag weightx="0.0" weighty="0.0"/>
         </constraints>
         <properties/>
@@ -555,7 +493,7 @@
       </grid>
       <component id="4a1f" class="javax.swing.JLabel" binding="step">
         <constraints>
-          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
           <gridbag weightx="0.0" weighty="0.0"/>
         </constraints>
         <properties>
@@ -564,7 +502,7 @@
       </component>
       <component id="b6b12" class="javax.swing.JLabel" binding="gameStep">
         <constraints>
-          <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
           <gridbag weightx="0.0" weighty="0.0"/>
         </constraints>
         <properties>
@@ -573,7 +511,7 @@
       </component>
       <grid id="dda50" binding="endGamePanel" layout-manager="GridBagLayout">
         <constraints>
-          <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <gridbag weightx="0.0" weighty="0.0"/>
         </constraints>
         <properties/>
@@ -643,6 +581,68 @@
             </constraints>
             <properties>
               <text value="Label"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="37802" binding="controlPanel" layout-manager="GridBagLayout">
+        <constraints>
+          <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.0" weighty="0.0"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="f66c" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="0.0" weighty="0.0"/>
+            </constraints>
+            <properties>
+              <text value="Режим игры:"/>
+            </properties>
+          </component>
+          <component id="1d558" class="javax.swing.JComboBox" binding="gametypeBox">
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="0.0" weighty="0.0"/>
+            </constraints>
+            <properties>
+              <model>
+                <item value="3x3"/>
+                <item value="6x6"/>
+              </model>
+            </properties>
+          </component>
+          <component id="14663" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="0.0" weighty="0.0"/>
+            </constraints>
+            <properties>
+              <text value="Сложность:"/>
+            </properties>
+          </component>
+          <component id="acb7b" class="javax.swing.JComboBox" binding="gamediffBox">
+            <constraints>
+              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="0.0" weighty="0.0"/>
+            </constraints>
+            <properties>
+              <model>
+                <item value="Low"/>
+                <item value="Medium"/>
+                <item value="High"/>
+              </model>
+            </properties>
+          </component>
+          <component id="1d1b4" class="javax.swing.JButton" binding="launchButton">
+            <constraints>
+              <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="0.0" weighty="0.0"/>
+            </constraints>
+            <properties>
+              <text value="Начать игру"/>
             </properties>
           </component>
         </children>

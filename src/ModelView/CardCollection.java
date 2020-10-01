@@ -53,9 +53,9 @@ public final class CardCollection {
         private int index;
 
         Card(JLabel capsule, int index) {
+            setCapsule(capsule);
             setIconType("blank");
             setIndex(index);
-            setCapsule(capsule);
         }
 
         boolean isPushed() {
