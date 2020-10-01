@@ -98,8 +98,8 @@ public class Main_Board extends JFrame {
             crossWinCount++;
             crossWinCountLabel.setText(String.valueOf(crossWinCount));
         }
-        pack();
         endGamePanel.setVisible(true);
+        pack();
     }
 
     private void newGame() {
