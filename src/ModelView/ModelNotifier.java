@@ -1,30 +1,52 @@
 package ModelView;
 
 import Model.tictactoe;
-
 import javax.swing.*;
 
 import static ModelView.CardCollection.GameBoard;
 
+//transports View data to the Model
+//updates CardCollection using View data
 public class ModelNotifier {
     private Model.tictactoe GameLogic;
-    //transports View data to the Model
-    //updates CardCollection using View data
+    private ViewUpdater UIUpdater;
 
-    public ModelNotifier(String gametype, JLabel[] labelCollection) {
+    public ModelNotifier(String gametype, JLabel[] labelCollection, ViewUpdater UIUpdater) {
         GameBoard = new CardCollection(gametype, labelCollection);
         GameLogic = new tictactoe();
+        this.UIUpdater = UIUpdater;
+    }
+
+    public void startNewGame() {
+        GameLogic = new tictactoe();
+        GameBoard.updateCards(GameBoard.getCardCollection(), "blank");
     }
 
     public void commitTransfer(JLabel affectedLabel, String gameStep) {
-        toModel(GameBoard, affectedLabel, gameStep);
-        toCardCollection(affectedLabel, gameStep);
+        int indexOfCard = findCardIndexByLabel(affectedLabel);
+        try {
+            if (!GameBoard.getCardCollection()[indexOfCard].isPushed()) {
+                toModel(indexOfCard, gameStep, UIUpdater);
+                toCardCollection(indexOfCard, gameStep);
+            }
+        } catch (Exception ignored) {
+        }
     }
 
-    private void toModel(CardCollection GameBoard, JLabel affectedLabel, String gameStep) {
-        GameLogic.test();
+    private void toModel(int index, String gameStep, ViewUpdater UIUpdater) {
+        GameLogic.test(index, gameStep, UIUpdater);
     }
 
-    private void toCardCollection(JLabel affectedLabel, String gameStep) {
+    private void toCardCollection(int desiredIndex, String gameStep) {
+        GameBoard.updateCards(new CardCollection.Card[]{GameBoard.getCardCollection()[desiredIndex]}, gameStep);
+    }
+
+    private int findCardIndexByLabel(JLabel affectedLabel) {
+        for (CardCollection.Card card : GameBoard.getCardCollection()) {
+            if (card.getCapsule().equals(affectedLabel)) {
+                return card.getIndex();
+            }
+        }
+        return 0;
     }
 }

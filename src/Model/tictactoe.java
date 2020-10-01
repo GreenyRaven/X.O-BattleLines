@@ -1,5 +1,7 @@
 package Model;
 
+import ModelView.ViewUpdater;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
@@ -45,8 +47,10 @@ public class tictactoe {
 //    }
 //    // test
 
-    public String test(){
+    public String test(int index, String gamestep, ViewUpdater UIUpdater){
         String greeting = "IT'S ME, TEST!";
+        UIUpdater.toNextStep();
+        UIUpdater.endThisGame(new int[]{1, 2, 3}, "winCross1");
         return greeting;
     }
 

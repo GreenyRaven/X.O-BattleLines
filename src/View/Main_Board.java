@@ -1,5 +1,7 @@
 package View;
+
 import ModelView.ModelNotifier;
+import ModelView.ViewUpdater;
 
 import javax.swing.*;
 import java.awt.event.MouseEvent;
@@ -53,30 +55,82 @@ public class Main_Board extends JFrame {
     private JPanel westGamePanel;
     private JPanel eastGamePanel;
     private JLabel gameStep;
+    private JButton newGameButton;
+    private JLabel winnerLabel;
+    private JPanel endGamePanel;
+    private JLabel step;
+    private JLabel nullWinCountLabel;
+    private JLabel crossWinCountLabel;
 
     ModelNotifier ModelNotifier;
+    ViewUpdater UIUpdater;
+    private boolean locked = false;
+    private int crossWinCount = 0;
+    private int nullWinCount = 0;
+    private String gametype;
+    private String gameDifficulty;
 
     public Main_Board() {
         getContentPane().add(main_panel);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLabelVisibility("6x6", false, false);
         setLabelListeners();
+        step.setVisible(false);
+        gameStep.setVisible(false);
+        endGamePanel.setVisible(false);
         launchButton.addActionListener(e -> setGameBoard((String) Objects.requireNonNull(gametypeBox.getSelectedItem())));
+        newGameButton.addActionListener(e -> newGame());
         pack();
         setVisible(true);
     }
 
-    private void sendData(JLabel affectedLabel) {
+    public void nextStep() {
+        locked = false;
+    }
+
+    public void endGame() {
         if (gameStep.getText().equals("Нолики")) {
-            ModelNotifier.commitTransfer(affectedLabel, gameStep.getText());
-            gameStep.setText("Крестики");
+            winnerLabel.setText("Победа за нулями!");
+            nullWinCount++;
+            nullWinCountLabel.setText(String.valueOf(nullWinCount));
         } else {
-            ModelNotifier.commitTransfer(affectedLabel, gameStep.getText());
-            gameStep.setText("Нолики");
+            winnerLabel.setText("Победа за крестами!");
+            crossWinCount++;
+            crossWinCountLabel.setText(String.valueOf(crossWinCount));
+        }
+        endGamePanel.setVisible(true);
+        pack();
+    }
+
+    private void newGame() {
+        //операции по старту новой игры
+        //
+        ModelNotifier.startNewGame();
+        //
+        //со стороны Main_Board:
+        endGamePanel.setVisible(false);
+        setLabelVisibility(gametype, true, true);
+        controlPanel.setVisible(false);
+        locked = false;
+        pack();
+    }
+
+    private void sendData(JLabel affectedLabel) {
+        if (!locked) {
+            if (gameStep.getText().equals("Нолики")) {
+                ModelNotifier.commitTransfer(affectedLabel, gameStep.getText());
+                gameStep.setText("Крестики");
+                locked = true;
+            } else {
+                ModelNotifier.commitTransfer(affectedLabel, gameStep.getText());
+                gameStep.setText("Нолики");
+                locked = true;
+            }
         }
     }
 
-    private JLabel[] returnLabelCollection() {
+
+    private JLabel[] returnFullLabelCollection() {
         JLabel[] labelCollection = new JLabel[36];
         labelCollection[0] = s_11;
         labelCollection[1] = s_12;
@@ -117,6 +171,20 @@ public class Main_Board extends JFrame {
         return labelCollection;
     }
 
+    private JLabel[] returnBasicLabelCollection() {
+        JLabel[] labelCollection = new JLabel[9];
+        labelCollection[0] = s_11;
+        labelCollection[1] = s_12;
+        labelCollection[2] = s_13;
+        labelCollection[3] = s_21;
+        labelCollection[4] = s_22;
+        labelCollection[5] = s_23;
+        labelCollection[6] = s_31;
+        labelCollection[7] = s_32;
+        labelCollection[8] = s_33;
+        return labelCollection;
+    }
+
     private void setLabelListeners() {
         MouseListener listener = new MouseListener() {
             @Override
@@ -144,22 +212,31 @@ public class Main_Board extends JFrame {
 
             }
         };
-        JLabel[] labelCollection = returnLabelCollection();
+        JLabel[] labelCollection = returnFullLabelCollection();
         for (JLabel jLabel : labelCollection) {
             jLabel.addMouseListener(listener);
         }
     }
 
     private void setGameBoard(String gametype) {
+        this.gametype = gametype;
+        gameDifficulty = (String) gamediffBox.getSelectedItem();
         controlPanel.setVisible(false);
+        endGamePanel.setVisible(false);
+        crossWinCountLabel.setText("0");
+        nullWinCountLabel.setText("0");
+        step.setVisible(true);
+        gameStep.setVisible(true);
         switch (gametype) {
             case "3x3" -> {
                 setLabelVisibility("3x3", true, true);
-                ModelNotifier = new ModelNotifier("3x3", returnLabelCollection());
+                UIUpdater = new ViewUpdater(this);
+                ModelNotifier = new ModelNotifier("3x3", returnBasicLabelCollection(), UIUpdater);
             }
             case "6x6" -> {
                 setLabelVisibility("6x6", true, true);
-                ModelNotifier = new ModelNotifier("6x6", returnLabelCollection());
+                UIUpdater = new ViewUpdater(this);
+                ModelNotifier = new ModelNotifier("6x6", returnFullLabelCollection(), UIUpdater);
             }
         }
         pack();
