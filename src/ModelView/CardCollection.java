@@ -47,7 +47,7 @@ public final class CardCollection {
 
     class Card {
         private boolean pushed;
-        private Image cardIcon;
+        private ImageIcon cardIcon;
         private String iconType;
         private JLabel capsule;
         private int index;
@@ -66,13 +66,13 @@ public final class CardCollection {
             this.pushed = pushed;
         }
 
-        Image getCardIcon() {
+        ImageIcon getCardIcon() {
             return cardIcon;
         }
 
-        private void setCardIcon(Image cardIcon) {
+        private void setCardIcon(ImageIcon cardIcon) {
             this.cardIcon = cardIcon;
-            capsule.setIcon((Icon) cardIcon);
+            capsule.setIcon(cardIcon);
         }
 
         String getIconType() {
@@ -82,7 +82,7 @@ public final class CardCollection {
         void setIconType(String iconType) {
             this.iconType = iconType;
             try {
-                setCardIcon(ImageIO.read(new File(iconType + ".png")));
+                setCardIcon(new ImageIcon(ImageIO.read(new File(iconType + ".png"))));
                 setPushed(!iconType.equals("blank"));
             } catch (IOException ex) {
                 System.out.println("Image not found");
