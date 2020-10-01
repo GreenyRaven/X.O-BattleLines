@@ -1,8 +1,8 @@
 package ModelView;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
 import java.io.File;
 import java.io.IOException;
 

@@ -2,10 +2,11 @@ package ModelView;
 
 import View.Main_Board;
 
+//transports Model results to the View
+//updates CardCollection using accumulated Model results
 public class ViewUpdater {
     Main_Board View;
-    //transports Model results to the View
-    //updates CardCollection using accumulated Model results
+
     public ViewUpdater(Main_Board View) {
         this.View = View;
     }

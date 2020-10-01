@@ -101,6 +101,7 @@ public class Main_Board extends JFrame {
         pack();
         endGamePanel.setVisible(true);
     }
+
     private void newGame() {
         //операции по старту новой игры
         //
@@ -169,7 +170,8 @@ public class Main_Board extends JFrame {
         labelCollection[35] = s_66;
         return labelCollection;
     }
-    private JLabel[] returnBasicLabelCollection () {
+
+    private JLabel[] returnBasicLabelCollection() {
         JLabel[] labelCollection = new JLabel[9];
         labelCollection[0] = s_11;
         labelCollection[1] = s_12;

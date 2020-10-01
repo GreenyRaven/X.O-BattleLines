@@ -1,16 +1,15 @@
 package ModelView;
 
 import Model.tictactoe;
-
 import javax.swing.*;
 
 import static ModelView.CardCollection.GameBoard;
 
+//transports View data to the Model
+//updates CardCollection using View data
 public class ModelNotifier {
     private Model.tictactoe GameLogic;
     private ViewUpdater UIUpdater;
-    //transports View data to the Model
-    //updates CardCollection using View data
 
     public ModelNotifier(String gametype, JLabel[] labelCollection, ViewUpdater UIUpdater) {
         GameBoard = new CardCollection(gametype, labelCollection);
