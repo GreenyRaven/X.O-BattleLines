@@ -35,12 +35,12 @@ public final class CardCollection {
         for (Card card : thoseCards) {
             switch (toStatus) {
                 case "blank" -> card.setIconType("blank");
-                case "zero" -> card.setIconType("zero");
+                case "zero" -> card.setIconType("null");
                 case "cross" -> card.setIconType("cross");
                 case "winCross1" -> card.setIconType("winCross1");
                 case "winCross2" -> card.setIconType("winCross2");
-                case "winZero1" -> card.setIconType("winZero1");
-                case "winZero2" -> card.setIconType("winZero2");
+                case "winZero1" -> card.setIconType("winNull1");
+                case "winZero2" -> card.setIconType("winNull2");
             }
         }
     }
