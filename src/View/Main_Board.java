@@ -61,6 +61,7 @@ public class Main_Board extends JFrame {
     private JLabel step;
     private JLabel nullWinCountLabel;
     private JLabel crossWinCountLabel;
+    private JPanel gameStepPanel;
 
     ModelNotifier ModelNotifier;
     ViewUpdater UIUpdater;
@@ -246,13 +247,20 @@ public class Main_Board extends JFrame {
         if (unlocked && visible) {
             switch (fieldSize) {
                 case "3x3" -> {
+                    gameStepPanel.setVisible(true);
+                    gameStepPanel.setEnabled(true);
                     baseGamePanel.setVisible(true);
                     baseGamePanel.setEnabled(true);
                     northGamePanel.setVisible(false);
+                    northGamePanel.setEnabled(false);
                     westGamePanel.setVisible(false);
+                    westGamePanel.setEnabled(false);
                     eastGamePanel.setVisible(false);
+                    eastGamePanel.setEnabled(false);
                 }
                 case "6x6" -> {
+                    gameStepPanel.setVisible(true);
+                    gameStepPanel.setEnabled(true);
                     baseGamePanel.setVisible(true);
                     baseGamePanel.setEnabled(true);
                     northGamePanel.setVisible(true);
@@ -267,13 +275,20 @@ public class Main_Board extends JFrame {
         if (!unlocked && visible) {
             switch (fieldSize) {
                 case "3x3" -> {
+                    gameStepPanel.setVisible(true);
+                    gameStepPanel.setEnabled(true);
                     baseGamePanel.setVisible(true);
                     baseGamePanel.setEnabled(false);
                     northGamePanel.setVisible(false);
+                    northGamePanel.setEnabled(false);
                     westGamePanel.setVisible(false);
+                    westGamePanel.setEnabled(false);
                     eastGamePanel.setVisible(false);
+                    eastGamePanel.setEnabled(false);
                 }
                 case "6x6" -> {
+                    gameStepPanel.setVisible(true);
+                    gameStepPanel.setEnabled(true);
                     baseGamePanel.setVisible(true);
                     baseGamePanel.setEnabled(false);
                     northGamePanel.setVisible(true);
@@ -286,6 +301,7 @@ public class Main_Board extends JFrame {
             }
         }
         if (!visible) {
+            gameStepPanel.setVisible(false);
             baseGamePanel.setVisible(false);
             northGamePanel.setVisible(false);
             westGamePanel.setVisible(false);

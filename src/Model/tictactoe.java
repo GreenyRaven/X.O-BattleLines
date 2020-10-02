@@ -9,7 +9,7 @@ import java.util.Random;
 public class tictactoe {
     private int[][] board;
 
-    public tictactoe(){
+    public tictactoe() {
         board = Create_board();
         System.out.println("Поле:");
         System.out.println(Arrays.deepToString(board));
@@ -47,97 +47,97 @@ public class tictactoe {
 //    }
 //    // test
 
-    public String test(int index, String gamestep, ViewUpdater UIUpdater){
+    public String test(int index, String gamestep, ViewUpdater UIUpdater) {
         String greeting = "IT'S ME, TEST!";
         UIUpdater.toNextStep();
-        UIUpdater.endThisGame(new int[]{1, 2, 3}, "winCross1");
+        UIUpdater.endThisGame(new int[]{0, 1, 2}, "winCross1");
         return greeting;
     }
 
-    private void Turn(int index, String figure){
+    private void Turn(int index, String figure) {
         int player = 0;
-        if (figure == "Крестики"){
+        if (figure == "Крестики") {
             player = 1;
-        }else{
+        } else {
             player = 2;
         }
 
         int row = 0;
         int col = 0;
-        switch (index){
+        switch (index) {
             case 0:
-                row=0;
-                col=0;
+                row = 0;
+                col = 0;
                 break;
             case 1:
-                row=0;
-                col=1;
+                row = 0;
+                col = 1;
                 break;
             case 2:
-                row=0;
-                col=2;
+                row = 0;
+                col = 2;
                 break;
             case 3:
-                row=1;
-                col=0;
+                row = 1;
+                col = 0;
                 break;
             case 4:
-                row=1;
-                col=1;
+                row = 1;
+                col = 1;
                 break;
             case 5:
-                row=1;
-                col=2;
+                row = 1;
+                col = 2;
                 break;
             case 6:
-                row=2;
-                col=0;
+                row = 2;
+                col = 0;
                 break;
             case 7:
-                row=2;
-                col=1;
+                row = 2;
+                col = 1;
                 break;
             case 8:
-                row=2;
-                col=2;
+                row = 2;
+                col = 2;
                 break;
         }
-        System.out.println("Row: " + row+ " Col: " + col);
+        System.out.println("Row: " + row + " Col: " + col);
     }
 
     //3x3
-    private int[][] Create_board(){
+    private int[][] Create_board() {
         return new int[3][3];
     }
 
-    private void Place(int[][] board, int player, int row, int col){
+    private void Place(int[][] board, int player, int row, int col) {
         board[row][col] = player;
     }
 
-    private ArrayList<int[]> Possibilities(int[][] board){
+    private ArrayList<int[]> Possibilities(int[][] board) {
         ArrayList<int[]> possibilities = new ArrayList<>();
-        for (int i = 0; i < board.length; i++){
-            for (int j = 0; j < board[i].length; j++){
-                if (board[i][j] == 0){
-                    possibilities.add(new int[]{i,j});
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
+                if (board[i][j] == 0) {
+                    possibilities.add(new int[]{i, j});
                 }
             }
         }
         return possibilities;
     }
 
-    private void Random_placement(int[][] board, int player){
+    private void Random_placement(int[][] board, int player) {
         ArrayList<int[]> possibilities = Possibilities(board);
-        if (!possibilities.isEmpty()){
+        if (!possibilities.isEmpty()) {
             Random random = new Random();
             random.setSeed(2);// delete seed
 
             int[] position = possibilities.get(random.nextInt(possibilities.size()));//[1,2]
-            Place(board,player,position[0],position[1]);
+            Place(board, player, position[0], position[1]);
         }
     }
 
-    private boolean Win_check(int[][] board, int player){
+    private boolean Win_check(int[][] board, int player) {
         // row
         for (int[] row : board) {
             int count = 0;
@@ -145,14 +145,14 @@ public class tictactoe {
                 if (value == player) {
                     count++;
                     if (count == 3) {
-   
+
                         return true;
                     }
                 }
             }
         }
         // column
-        for(int numcol = 0; numcol < board[0].length; numcol++) {
+        for (int numcol = 0; numcol < board[0].length; numcol++) {
             int count = 0;
             for (int[] row : board) {
                 int value = row[numcol];
@@ -168,49 +168,48 @@ public class tictactoe {
         int n = board.length;
         int countprinc = 0;
         int countsecnd = 0;
-        for(int numrow = 0; numrow < board.length; numrow++) {
-            for(int numcol = 0; numcol < board[0].length; numcol++){
+        for (int numrow = 0; numrow < board.length; numrow++) {
+            for (int numcol = 0; numcol < board[0].length; numcol++) {
                 // principal
-                if (numrow == numcol){
+                if (numrow == numcol) {
                     int[] row = board[numrow];
                     int value = row[numcol];
-                    if (value == player){
+                    if (value == player) {
                         countprinc++;
-                        if (countprinc == 3){
+                        if (countprinc == 3) {
                             return true;
                         }
                     }
                 }
             }
-            for(int numcol = 0; numcol < board[0].length; numcol++){
+            for (int numcol = 0; numcol < board[0].length; numcol++) {
                 // secondary
-                if (numcol == (n-1)){
+                if (numcol == (n - 1)) {
                     int[] row = board[numrow];
                     int value = row[numcol];
-                    if (value == player){
+                    if (value == player) {
                         countsecnd++;
-                        if (countsecnd == 3){
+                        if (countsecnd == 3) {
                             return true;
                         }
                     }
                 }
             }
-            n --;
+            n--;
         }
         return false;
     }
 
-    private void Make_a_move(int[][] board, int player, int row, int col){
+    private void Make_a_move(int[][] board, int player, int row, int col) {
         //int turn = 0;
         //System.out.println("Номер хода: " + turn);
         Place(board, player, row, col);
         System.out.println("Ход:");
         System.out.println(Arrays.deepToString(board));
         //turn++;
-        if (Win_check(board,player)){
+        if (Win_check(board, player)) {
             System.out.println("Player " + player + " won!");
-        }
-        else if (Possibilities(board).isEmpty()){
+        } else if (Possibilities(board).isEmpty()) {
             System.out.println("No one won!");
         }
     }

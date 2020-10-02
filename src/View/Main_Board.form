@@ -491,24 +491,6 @@
           </component>
         </children>
       </grid>
-      <component id="4a1f" class="javax.swing.JLabel" binding="step">
-        <constraints>
-          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
-          <gridbag weightx="0.0" weighty="0.0"/>
-        </constraints>
-        <properties>
-          <text value="Шаг:"/>
-        </properties>
-      </component>
-      <component id="b6b12" class="javax.swing.JLabel" binding="gameStep">
-        <constraints>
-          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-          <gridbag weightx="0.0" weighty="0.0"/>
-        </constraints>
-        <properties>
-          <text value="Нолики"/>
-        </properties>
-      </component>
       <grid id="dda50" binding="endGamePanel" layout-manager="GridBagLayout">
         <constraints>
           <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -643,6 +625,28 @@
             </constraints>
             <properties>
               <text value="Начать игру"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="89401" binding="gameStepPanel" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.0" weighty="0.0"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="4a1f" class="javax.swing.JLabel" binding="step">
+            <constraints/>
+            <properties>
+              <text value="Шаг:"/>
+            </properties>
+          </component>
+          <component id="b6b12" class="javax.swing.JLabel" binding="gameStep">
+            <constraints/>
+            <properties>
+              <text value="Нолики"/>
             </properties>
           </component>
         </children>
