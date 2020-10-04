@@ -13,17 +13,7 @@ import weka.core.Instance;
 import weka.core.Instances;
 
 
-
 public class tictactoe_create_dataset {
-//    private static int[][] board;
-//    private int[] move;
-
-//    public tictactoe_test(){
-//        board = Create_board();
-//        System.out.println("Поле:");
-//        System.out.println(Arrays.deepToString(board));
-//        System.out.println("----------");
-//    }
 
     public static void main(String[] args) throws IOException {
 
@@ -56,10 +46,6 @@ public class tictactoe_create_dataset {
         attributes.add(cls);
         Instances dataset = new Instances("tictactoe-dataset", attributes, 0);
 
-        System.out.println("start");
-
-        //tictactoe Game = new tictactoe();
-
         int numgames = 10;
         int[] players = {1,2,1,2,1,2,1,2,1};
 
@@ -68,44 +54,21 @@ public class tictactoe_create_dataset {
             double[] values = new double[dataset.numAttributes()];
             System.out.println("Game: " + game);
             int[][] board = Create_board();
-//            System.out.println("Поле:");
-//            System.out.println(Arrays.deepToString(board));
-//            System.out.println("----------");
             for (int player : players ){
                 System.out.println("Turn: " + turn++);
 
-                //Place(board,2, 2, 2);
-                //Place(board,1, 0, 1);
-                //Place(board,2, 0, 2);
-
-                //demo
-//                ArrayList<int[]> possibilities = Possibilities(board);
-//                System.out.println("@@@@@@@@@@@");
-//                System.out.println("Возможные ходы:");
-//                System.out.println(Arrays.deepToString(possibilities.toArray()));
-//                System.out.println("@@@@@@@@@@@");
-                //demo
-
                 Random_placement(board, player);
-//                System.out.println("Случайный ход:");//убрать сид!
-//                System.out.println(Arrays.deepToString(board));
-//                System.out.println("----------");
-
-                //System.out.println(board);
 
                 ArrayList<Integer> win_results = new ArrayList();
                 int i = 0;
 
                 if (Win_check(board,player)){
                     System.out.println("Player " + player + " won!");
-                    //arrlist
-                    //i
                     for (int[] row : board){
                         for (int value : row){
                             win_results.add(value);
                             values[i] = value;
                             i++;
-                            //System.out.println(win_results);
                         }
                     }
                     win_results.add(player);
@@ -120,7 +83,6 @@ public class tictactoe_create_dataset {
                             win_results.add(value);
                             values[i] = value;
                             i++;
-                            //System.out.println(win_results);
                         }
                     }
                     win_results.add(0);
@@ -133,12 +95,6 @@ public class tictactoe_create_dataset {
             dataset.add(inst);
         }
 
-//        move = Make_a_move(board,player, row, col);
-//        // test
-//        Game.make_a_move();
-//        // test
-
-
         //Storing in arff
         BufferedWriter writer = new BufferedWriter(
                 new FileWriter("out.arff"));
@@ -147,71 +103,7 @@ public class tictactoe_create_dataset {
         writer.flush();
         writer.close();
 
-        System.out.println("end");
     }
-
-    // test
-//    private void make_a_move(){
-//        move = Make_a_move(board,1,0,0);
-//        System.out.println("Row: " + move[0]+ " Col: " + move[1]);
-//    }
-    // test
-
-//    public String test(){
-//        String greeting = "IT'S ME, TEST!";
-//        return greeting;
-//    }
-
-//    private void Turn(int index, String figure){
-//        int player = 0;
-//        if (figure == "Крестики"){
-//            player = 1;
-//        }else{
-//            player = 2;
-//        }
-//
-//        int row = 0;
-//        int col = 0;
-//        switch (index){
-//            case 0:
-//                row=0;
-//                col=0;
-//                break;
-//            case 1:
-//                row=0;
-//                col=1;
-//                break;
-//            case 2:
-//                row=0;
-//                col=2;
-//                break;
-//            case 3:
-//                row=1;
-//                col=0;
-//                break;
-//            case 4:
-//                row=1;
-//                col=1;
-//                break;
-//            case 5:
-//                row=1;
-//                col=2;
-//                break;
-//            case 6:
-//                row=2;
-//                col=0;
-//                break;
-//            case 7:
-//                row=2;
-//                col=1;
-//                break;
-//            case 8:
-//                row=2;
-//                col=2;
-//                break;
-//        }
-//        System.out.println("Row: " + row+ " Col: " + col);
-//    }
 
     //3x3
     private static int[][] Create_board(){
@@ -307,18 +199,4 @@ public class tictactoe_create_dataset {
         return false;
     }
 
-    private static void Make_a_move(int[][] board, int player, int row, int col){
-        //int turn = 0;
-        //System.out.println("Номер хода: " + turn);
-        Place(board, player, row, col);
-        System.out.println("Ход:");
-        System.out.println(Arrays.deepToString(board));
-        //turn++;
-        if (Win_check(board,player)){
-            System.out.println("Player " + player + " won!");
-        }
-        else if (Possibilities(board).isEmpty()){
-            System.out.println("No one won!");
-        }
-    }
 }
