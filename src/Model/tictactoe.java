@@ -8,6 +8,16 @@ import java.util.Random;
 
 public class tictactoe {
     private int[][] board;
+    private int player;
+    private int row;
+    private int col;
+
+    private int num_row;
+    private int num_col;
+    private int diag_princ;
+    private int diag_sec;
+    private int[] won;
+    private String img;
 
     public tictactoe() {
         board = Create_board();
@@ -47,62 +57,109 @@ public class tictactoe {
 //    }
 //    // test
 
-    public String test(int index, String gamestep, ViewUpdater UIUpdater) {
-        String greeting = "IT'S ME, TEST!";
+    // добавить идентификатор что играет AI
+    public void test(int index, String gamestep, ViewUpdater UIUpdater) {// boolean ai
+        tictactoe game = new tictactoe();
+        game.Turn(index, gamestep);//в переменные: игрока и место шага
+//        game.Make_a_move(this.board, this.player, this.row, this.col);
+        game.Place(this.board, this.player, this.row, this.col);
+        if (game.Win_check(this.board, this.player)){
+            game.Won_place();
+            UIUpdater.endThisGame(this.won, this.img);
+        }else{
+            //draw
+        }
         UIUpdater.toNextStep();
-        UIUpdater.endThisGame(new int[]{0, 1, 2}, "winCross1");
-        return greeting;
+
     }
 
+    // decode turn
     private void Turn(int index, String figure) {
-        int player = 0;
-        if (figure == "Крестики") {
-            player = 1;
+        if (figure.equals("Крестики")) {
+            this.player = 1;
         } else {
-            player = 2;
+            this.player = 2;
         }
 
-        int row = 0;
-        int col = 0;
         switch (index) {
-            case 0:
-                row = 0;
-                col = 0;
-                break;
-            case 1:
-                row = 0;
-                col = 1;
-                break;
-            case 2:
-                row = 0;
-                col = 2;
-                break;
-            case 3:
-                row = 1;
-                col = 0;
-                break;
-            case 4:
-                row = 1;
-                col = 1;
-                break;
-            case 5:
-                row = 1;
-                col = 2;
-                break;
-            case 6:
-                row = 2;
-                col = 0;
-                break;
-            case 7:
-                row = 2;
-                col = 1;
-                break;
-            case 8:
-                row = 2;
-                col = 2;
-                break;
+            case 0 -> {
+                this.row = 0;
+                this.col = 0;
+            }
+            case 1 -> {
+                this.row = 0;
+                this.col = 1;
+            }
+            case 2 -> {
+                this.row = 0;
+                this.col = 2;
+            }
+            case 3 -> {
+                this.row = 1;
+                this.col = 0;
+            }
+            case 4 -> {
+                this.row = 1;
+                this.col = 1;
+            }
+            case 5 -> {
+                this.row = 1;
+                this.col = 2;
+            }
+            case 6 -> {
+                this.row = 2;
+                this.col = 0;
+            }
+            case 7 -> {
+                this.row = 2;
+                this.col = 1;
+            }
+            case 8 -> {
+                this.row = 2;
+                this.col = 2;
+            }
         }
         System.out.println("Row: " + row + " Col: " + col);
+    }
+
+    // encode won_place
+    private void Won_place() {
+        switch (this.num_row) {
+            case 0 -> {
+                this.won= new int[]{0, 1, 2};
+                this.img = "";
+            }
+            case 1 -> {
+                this.won = new int[]{3, 4, 5};
+                this.img = "";
+            }
+            case 2 -> {
+                this.won = new int[]{6, 7, 8};
+                this.img = "";
+            }
+        }
+        switch (this.num_col) {
+            case 0 -> {
+                this.won = new int[]{0, 3, 6};
+                this.img = "";
+            }
+            case 1 -> {
+                this.won = new int[]{1, 4, 7};
+                this.img = "";
+            }
+            case 2 -> {
+                this.won = new int[]{2, 5, 8};
+                this.img = "";
+            }
+        }
+        if (this.diag_princ == 1){
+            this.won = new int[]{0, 4, 8};
+            this.img = "";
+        }
+        if (this.diag_sec == 1){
+            this.won = new int[]{2, 4, 6};
+            this.img = "";
+        }
     }
 
     //3x3
@@ -111,7 +168,11 @@ public class tictactoe {
     }
 
     private void Place(int[][] board, int player, int row, int col) {
-        board[row][col] = player;
+        board[row][col] = player;// this.board ?
+    }
+
+    private void Place_AI(int[][] board, int player){
+
     }
 
     private ArrayList<int[]> Possibilities(int[][] board) {
@@ -130,7 +191,7 @@ public class tictactoe {
         ArrayList<int[]> possibilities = Possibilities(board);
         if (!possibilities.isEmpty()) {
             Random random = new Random();
-            random.setSeed(2);// delete seed
+            //random.setSeed(2);// delete seed
 
             int[] position = possibilities.get(random.nextInt(possibilities.size()));//[1,2]
             Place(board, player, position[0], position[1]);
@@ -139,17 +200,19 @@ public class tictactoe {
 
     private boolean Win_check(int[][] board, int player) {
         // row
+        int num_row = 0;
         for (int[] row : board) {
             int count = 0;
             for (int value : row) {
                 if (value == player) {
                     count++;
                     if (count == 3) {
-
+                        this.num_row = num_row;
                         return true;
                     }
                 }
             }
+            num_row++;
         }
         // column
         for (int numcol = 0; numcol < board[0].length; numcol++) {
@@ -159,6 +222,7 @@ public class tictactoe {
                 if (value == player) {
                     count++;
                     if (count == 3) {
+                        this.num_col = numcol;
                         return true;
                     }
                 }
@@ -177,6 +241,7 @@ public class tictactoe {
                     if (value == player) {
                         countprinc++;
                         if (countprinc == 3) {
+                            this.diag_princ = 1;
                             return true;
                         }
                     }
@@ -190,6 +255,7 @@ public class tictactoe {
                     if (value == player) {
                         countsecnd++;
                         if (countsecnd == 3) {
+                            this.diag_sec = 1;
                             return true;
                         }
                     }
@@ -200,17 +266,17 @@ public class tictactoe {
         return false;
     }
 
-    private void Make_a_move(int[][] board, int player, int row, int col) {
-        //int turn = 0;
-        //System.out.println("Номер хода: " + turn);
-        Place(board, player, row, col);
-        System.out.println("Ход:");
-        System.out.println(Arrays.deepToString(board));
-        //turn++;
-        if (Win_check(board, player)) {
-            System.out.println("Player " + player + " won!");
-        } else if (Possibilities(board).isEmpty()) {
-            System.out.println("No one won!");
-        }
-    }
+//    private void Make_a_move(int[][] board, int player, int row, int col) {
+////        if (ai == True){
+////
+////        }
+//        Place(board, player, row, col);
+//        System.out.println("Ход:");
+//        System.out.println(Arrays.deepToString(board));
+//        if (Win_check(board, player)) {
+//            System.out.println("Player " + player + " won!");
+//        } else if (Possibilities(board).isEmpty()) {
+//            System.out.println("No one won!");
+//        }
+//    }
 }
