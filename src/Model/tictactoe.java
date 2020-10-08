@@ -19,13 +19,14 @@ public class tictactoe {
     private int[] won;
     private String img;
 
-    public tictactoe() {
+    public tictactoe(ViewUpdater UIUpdater) {
         board = Create_board();
         System.out.println("Поле:");
         System.out.println(Arrays.deepToString(board));
         System.out.println("----------");
     }
-    public tictactoe(String aiDifficulty) {
+
+    public tictactoe(ViewUpdater UIUpdater, String aiDifficulty) {
         board = Create_board();
         System.out.println("Поле:");
         System.out.println(Arrays.deepToString(board));
@@ -65,14 +66,14 @@ public class tictactoe {
 
     // добавить идентификатор что играет AI
     public void test(int index, String gamestep, ViewUpdater UIUpdater) {// boolean ai
-        tictactoe game = new tictactoe();
+        tictactoe game = new tictactoe(UIUpdater);
         game.Turn(index, gamestep);//в переменные: игрока и место шага
 //        game.Make_a_move(this.board, this.player, this.row, this.col);
         game.Place(this.board, this.player, this.row, this.col);
-        if (game.Win_check(this.board, this.player)){
+        if (game.Win_check(this.board, this.player)) {
             game.Won_place();
             UIUpdater.endThisGameWithWinner(this.won, this.img);
-        }else{
+        } else {
             //draw
         }
         UIUpdater.toNextStep();
@@ -131,7 +132,7 @@ public class tictactoe {
     private void Won_place() {
         switch (this.num_row) {
             case 0 -> {
-                this.won= new int[]{0, 1, 2};
+                this.won = new int[]{0, 1, 2};
                 this.img = "";
             }
             case 1 -> {
@@ -157,11 +158,11 @@ public class tictactoe {
                 this.img = "";
             }
         }
-        if (this.diag_princ == 1){
+        if (this.diag_princ == 1) {
             this.won = new int[]{0, 4, 8};
             this.img = "";
         }
-        if (this.diag_sec == 1){
+        if (this.diag_sec == 1) {
             this.won = new int[]{2, 4, 6};
             this.img = "";
         }
@@ -176,7 +177,7 @@ public class tictactoe {
         board[row][col] = player;// this.board ?
     }
 
-    private void Place_AI(int[][] board, int player){
+    private void Place_AI(int[][] board, int player) {
 
     }
 

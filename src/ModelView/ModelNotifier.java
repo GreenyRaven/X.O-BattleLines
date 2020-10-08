@@ -14,23 +14,23 @@ public class ModelNotifier {
 
     public ModelNotifier(String AIDifficulty, String gameType, JLabel[] labelCollection, ViewUpdater UIUpdater) {
         GameBoard = new CardCollection(gameType, labelCollection);
-            GameLogic = new tictactoe(AIDifficulty);
+        GameLogic = new tictactoe(UIUpdater, AIDifficulty);
         this.UIUpdater = UIUpdater;
     }
 
     public ModelNotifier(String gameType, JLabel[] labelCollection, ViewUpdater UIUpdater) {
         GameBoard = new CardCollection(gameType, labelCollection);
-        GameLogic = new tictactoe();
+        GameLogic = new tictactoe(UIUpdater);
         this.UIUpdater = UIUpdater;
     }
 
     public void startNewGame() {
-        GameLogic = new tictactoe();
+        GameLogic = new tictactoe(UIUpdater);
         GameBoard.updateCards(GameBoard.getCardCollection(), "blank");
     }
 
     public void startNewGame(String AIGameDifficulty) {
-        GameLogic = new tictactoe(AIGameDifficulty);
+        GameLogic = new tictactoe(UIUpdater, AIGameDifficulty);
         GameBoard.updateCards(GameBoard.getCardCollection(), "blank");
     }
 
