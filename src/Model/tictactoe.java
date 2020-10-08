@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
+import weka.classifiers.Classifier;
+import weka.core.*;
+
 public class tictactoe {
     private int[][] board;
     private int player;
@@ -33,41 +36,9 @@ public class tictactoe {
         System.out.println("----------");
     }
 
-//    public static void main(String[] args) {
-//        System.out.println("start");
-//
-//        tictactoe Game = new tictactoe();
-////        //demo
-////        ArrayList<int[]> possibilities = Possibilities(board);
-////        System.out.println("@@@@@@@@@@@");
-////        System.out.println("Возможные ходы:");
-////        System.out.println(Arrays.deepToString(possibilities.toArray()));
-////        System.out.println("@@@@@@@@@@@");
-////        //demo
-////
-////        Random_placement(board, player);
-////        System.out.println("Случайный ход:");//убрать сид!
-////        System.out.println(Arrays.deepToString(board));
-////        System.out.println("----------");
-////        move = Make_a_move(board,player, row, col);
-//        // test
-//        Game.make_a_move();
-//        // test
-//
-//        System.out.println("end");
-//    }
-
-//    // test
-//    private void make_a_move(){
-//        move = Make_a_move(board,1,0,0);
-//        System.out.println("Row: " + move[0]+ " Col: " + move[1]);
-//    }
-//    // test
-
-    // добавить идентификатор что играет AI
-    public void test(int index, String gamestep, ViewUpdater UIUpdater) {// boolean ai
+    public void Play(int index, String gamestep, ViewUpdater UIUpdater) {
         tictactoe game = new tictactoe(UIUpdater);
-        game.Turn(index, gamestep);//в переменные: игрока и место шага
+        game.Turn(index, gamestep);//to variable: place(row and col) and player
 //        game.Make_a_move(this.board, this.player, this.row, this.col);
         game.Place(this.board, this.player, this.row, this.col);
         if (game.Win_check(this.board, this.player)) {
@@ -174,11 +145,76 @@ public class tictactoe {
     }
 
     private void Place(int[][] board, int player, int row, int col) {
-        board[row][col] = player;// this.board ?
+        board[row][col] = player;
     }
 
-    private void Place_AI(int[][] board, int player) {
+    private void Place_AI(int[][] board, int player) throws Exception {
+        // create dataset in memory
+        Attribute p0 = new Attribute("p0");
+        Attribute p1 = new Attribute("p1");
+        Attribute p2 = new Attribute("p2");
+        Attribute p3 = new Attribute("p3");
+        Attribute p4 = new Attribute("p4");
+        Attribute p5 = new Attribute("p5");
+        Attribute p6 = new Attribute("p6");
+        Attribute p7 = new Attribute("p7");
+        Attribute p8 = new Attribute("p8");
 
+        ArrayList<String> labels = new ArrayList<String>();
+        labels.add("0");
+        labels.add("1");
+        labels.add("2");
+        Attribute cls = new Attribute("class", labels);
+        ArrayList<Attribute> attributes = new ArrayList<Attribute>();
+        attributes.add(p0);
+        attributes.add(p1);
+        attributes.add(p2);
+        attributes.add(p3);
+        attributes.add(p4);
+        attributes.add(p5);
+        attributes.add(p6);
+        attributes.add(p7);
+        attributes.add(p8);
+        attributes.add(cls);
+        Instances dataset = new Instances("tictactoe-move-data", attributes, 0);//накапливаются?
+
+        Classifier mlp = (Classifier) weka.core.SerializationHelper.read("model_mlp.model");
+
+        ArrayList<int[]> possibilities = Possibilities(board);
+        int[] best_move = new int[2];
+        double best_dist = 0.0;
+        for (int[] possible_move : possibilities) {
+            //Instances dataset = new Instances("tictactoe-move-data", attributes, 0);
+            int[][] current_board_copy = Arrays.stream(board).map(int[]::clone).toArray(int[][]::new);
+            double[] predict_board = new double[dataset.numAttributes()];//for dataset
+            Place(current_board_copy, player, possible_move[0], possible_move[1]);
+            int i = 0;
+            for (int[] row : current_board_copy) {
+                for (int value : row) {
+                    predict_board[i] = value;
+                    i++;
+                }
+            }
+
+            Instance inst = new DenseInstance(1.0, predict_board);
+            inst.setMissing(9);
+            System.out.println("Instance: " + inst);
+            dataset.add(inst);
+            dataset.setClassIndex(dataset.numAttributes() - 1);
+
+            double clsLabel = mlp.classifyInstance(dataset.lastInstance());// who is winning?
+            double[] dist_labels = mlp.distributionForInstance(dataset.lastInstance());
+            System.out.println("Current move: " + possible_move);
+            System.out.println("Class label: " + clsLabel);
+            System.out.println("Distribution for classes: " + Utils.arrayToString(dist_labels));
+
+            if (dist_labels[player] > best_dist){
+                best_dist = dist_labels[player];
+                best_move = possible_move;
+            }
+
+        }
+        Place(board, player, best_move[0], best_move[1]);
     }
 
     private ArrayList<int[]> Possibilities(int[][] board) {
@@ -197,8 +233,7 @@ public class tictactoe {
         ArrayList<int[]> possibilities = Possibilities(board);
         if (!possibilities.isEmpty()) {
             Random random = new Random();
-            //random.setSeed(2);// delete seed
-
+            //random.setSeed(1);
             int[] position = possibilities.get(random.nextInt(possibilities.size()));//[1,2]
             Place(board, player, position[0], position[1]);
         }

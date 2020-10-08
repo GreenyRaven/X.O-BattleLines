@@ -46,7 +46,7 @@ public class ModelNotifier {
     }
 
     private void toModel(int index, String gameStep, ViewUpdater UIUpdater) {
-        GameLogic.test(index, gameStep, UIUpdater);
+        GameLogic.Play(index, gameStep, UIUpdater);
     }
 
     private void toCardCollection(int desiredIndex, String gameStep) {
