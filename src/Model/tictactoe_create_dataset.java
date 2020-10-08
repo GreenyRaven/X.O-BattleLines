@@ -93,6 +93,7 @@ public class tictactoe_create_dataset {
                 }
             }
             Instance inst = new DenseInstance(1.0,values);
+//          inst.setMissing(9); set class as unknown if need dataset without label for test classification
             dataset.add(inst);
         }
 
