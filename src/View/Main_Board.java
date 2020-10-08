@@ -63,7 +63,7 @@ public class Main_Board extends JFrame {
     private JLabel crossWinCountLabel;
     private JPanel gameStepPanel;
     private JCheckBox withAI;
-    private JComboBox firstStep;
+    private JComboBox firstStepBox;
     private JLabel gameDiffLabel;
 
     ModelNotifier ModelNotifier;
@@ -91,6 +91,11 @@ public class Main_Board extends JFrame {
     }
 
     public void nextStep() {
+        if (gameStep.getText().equals("Нолики")) {
+            gameStep.setText("Крестики");
+        } else {
+            gameStep.setText("Нолики");
+        }
         locked = false;
     }
 
@@ -113,11 +118,7 @@ public class Main_Board extends JFrame {
     }
 
     private void newGame() {
-        //операции по старту новой игры
-        //
         ModelNotifier.startNewGame();
-        //
-        //со стороны Main_Board:
         endGamePanel.setVisible(false);
         setLabelVisibility(gametype, true, true);
         controlPanel.setVisible(false);
@@ -127,15 +128,8 @@ public class Main_Board extends JFrame {
 
     private void sendData(JLabel affectedLabel) {
         if (!locked) {
-            if (gameStep.getText().equals("Нолики")) {
-                ModelNotifier.commitTransfer(affectedLabel, gameStep.getText());
-                gameStep.setText("Крестики");
-                locked = true;
-            } else {
-                ModelNotifier.commitTransfer(affectedLabel, gameStep.getText());
-                gameStep.setText("Нолики");
-                locked = true;
-            }
+            ModelNotifier.commitTransfer(affectedLabel, gameStep.getText());
+            locked = true;
         }
     }
 
@@ -253,6 +247,7 @@ public class Main_Board extends JFrame {
         endGamePanel.setVisible(false);
         crossWinCountLabel.setText("0");
         nullWinCountLabel.setText("0");
+        gameStep.setText((String) firstStepBox.getSelectedItem());
         step.setVisible(true);
         gameStep.setVisible(true);
         switch (gametype) {
