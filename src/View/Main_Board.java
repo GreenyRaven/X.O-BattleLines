@@ -71,7 +71,7 @@ public class Main_Board extends JFrame {
     private boolean locked = false;
     private int crossWinCount = 0;
     private int nullWinCount = 0;
-    private String gametype;
+    private String gameType;
     private String gameDifficulty;
     private boolean gameAgainstAI;
 
@@ -120,12 +120,12 @@ public class Main_Board extends JFrame {
 
     private void newGame() {
         if (gameAgainstAI) {
-            ModelNotifier.startNewGame(gameDifficulty);
+            ModelNotifier.startNewGame(gameType, gameDifficulty);
         } else {
-            ModelNotifier.startNewGame();
+            ModelNotifier.startNewGame(gameType);
         }
         endGamePanel.setVisible(false);
-        setLabelVisibility(gametype, true, true);
+        setLabelVisibility(gameType, true, true);
         controlPanel.setVisible(false);
         locked = false;
         pack();
@@ -243,8 +243,8 @@ public class Main_Board extends JFrame {
         newGameButton.addActionListener(e -> newGame());
     }
 
-    private void setGameBoard(String gametype) {
-        this.gametype = gametype;
+    private void setGameBoard(String gameType) {
+        this.gameType = gameType;
         this.gameAgainstAI = withAI.isSelected();
         gameDifficulty = (String) gamediffBox.getSelectedItem();
         gameDifficulty = (String) gamediffBox.getSelectedItem();
@@ -255,7 +255,7 @@ public class Main_Board extends JFrame {
         gameStep.setText((String) firstStepBox.getSelectedItem());
         step.setVisible(true);
         gameStep.setVisible(true);
-        switch (gametype) {
+        switch (gameType) {
             case "3x3" -> {
                 setLabelVisibility("3x3", true, true);
                 UIUpdater = new ViewUpdater(this);

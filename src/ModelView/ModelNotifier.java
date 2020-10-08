@@ -14,23 +14,23 @@ public class ModelNotifier {
 
     public ModelNotifier(String AIDifficulty, String gameType, JLabel[] labelCollection, ViewUpdater UIUpdater) {
         GameBoard = new CardCollection(gameType, labelCollection);
-        GameLogic = new tictactoe(UIUpdater, AIDifficulty);
+        GameLogic = new tictactoe(UIUpdater, AIDifficulty, gameType);
         this.UIUpdater = UIUpdater;
     }
 
     public ModelNotifier(String gameType, JLabel[] labelCollection, ViewUpdater UIUpdater) {
         GameBoard = new CardCollection(gameType, labelCollection);
-        GameLogic = new tictactoe(UIUpdater);
+        GameLogic = new tictactoe(UIUpdater, gameType);
         this.UIUpdater = UIUpdater;
     }
 
-    public void startNewGame() {
-        GameLogic = new tictactoe(UIUpdater);
+    public void startNewGame(String gameType) {
+        GameLogic = new tictactoe(UIUpdater, gameType);
         GameBoard.updateCards(GameBoard.getCardCollection(), "blank");
     }
 
-    public void startNewGame(String AIGameDifficulty) {
-        GameLogic = new tictactoe(UIUpdater, AIGameDifficulty);
+    public void startNewGame(String AIGameDifficulty, String gameType) {
+        GameLogic = new tictactoe(UIUpdater, AIGameDifficulty, gameType);
         GameBoard.updateCards(GameBoard.getCardCollection(), "blank");
     }
 
@@ -38,15 +38,15 @@ public class ModelNotifier {
         int indexOfCard = findCardIndexByLabel(affectedLabel);
         try {
             if (!GameBoard.getCardCollection()[indexOfCard].isPushed()) {
-                toModel(indexOfCard, gameStep, UIUpdater);
+                toModel(indexOfCard, gameStep);
                 toCardCollection(indexOfCard, gameStep);
             }
         } catch (Exception ignored) {
         }
     }
 
-    private void toModel(int index, String gameStep, ViewUpdater UIUpdater) {
-        GameLogic.Play(index, gameStep, UIUpdater);
+    private void toModel(int index, String gameStep) {
+        GameLogic.test(index, gameStep);
     }
 
     private void toCardCollection(int desiredIndex, String gameStep) {

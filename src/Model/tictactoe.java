@@ -22,20 +22,24 @@ public class tictactoe {
     private int[] won;
     private String img;
 
-    public tictactoe(ViewUpdater UIUpdater) {
+    public tictactoe(ViewUpdater UIUpdater, String gameType) {
         board = Create_board();
         System.out.println("Поле:");
         System.out.println(Arrays.deepToString(board));
         System.out.println("----------");
     }
 
-    public tictactoe(ViewUpdater UIUpdater, String aiDifficulty) {
+    public tictactoe(ViewUpdater UIUpdater, String aiDifficulty, String gameType) {
         board = Create_board();
         System.out.println("Поле:");
         System.out.println(Arrays.deepToString(board));
         System.out.println("----------");
     }
 
+    public void test (int index, String gameStep) {
+
+    }
+    /*
     public void Play(int index, String gamestep, ViewUpdater UIUpdater) {
         tictactoe game = new tictactoe(UIUpdater);
         game.Turn(index, gamestep);//to variable: place(row and col) and player
@@ -48,7 +52,7 @@ public class tictactoe {
             //draw
         }
         UIUpdater.toNextStep();
-    }
+    } */
 
     // decode turn
     private void Turn(int index, String figure) {
