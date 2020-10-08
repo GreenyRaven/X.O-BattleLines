@@ -70,7 +70,6 @@ public class tictactoe {
             //draw
         }
         UIUpdater.toNextStep();
-
     }
 
     // decode turn

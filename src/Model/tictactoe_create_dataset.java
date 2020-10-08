@@ -1,5 +1,6 @@
 package Model;
 
+/*
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -11,10 +12,10 @@ import weka.core.Attribute;
 import weka.core.DenseInstance;
 import weka.core.Instance;
 import weka.core.Instances;
-
+*/
 
 public class tictactoe_create_dataset {
-
+/*
     public static void main(String[] args) throws IOException {
 
         // create dataset
@@ -198,5 +199,5 @@ public class tictactoe_create_dataset {
         }
         return false;
     }
-
+*/
 }
