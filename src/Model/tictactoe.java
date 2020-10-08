@@ -25,6 +25,12 @@ public class tictactoe {
         System.out.println(Arrays.deepToString(board));
         System.out.println("----------");
     }
+    public tictactoe(String aiDifficulty) {
+        board = Create_board();
+        System.out.println("Поле:");
+        System.out.println(Arrays.deepToString(board));
+        System.out.println("----------");
+    }
 
 //    public static void main(String[] args) {
 //        System.out.println("start");
@@ -65,7 +71,7 @@ public class tictactoe {
         game.Place(this.board, this.player, this.row, this.col);
         if (game.Win_check(this.board, this.player)){
             game.Won_place();
-            UIUpdater.endThisGame(this.won, this.img);
+            UIUpdater.endThisGameWithWinner(this.won, this.img);
         }else{
             //draw
         }

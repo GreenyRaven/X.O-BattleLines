@@ -1,6 +1,7 @@
 package ModelView;
 
 import Model.tictactoe;
+
 import javax.swing.*;
 
 import static ModelView.CardCollection.GameBoard;
@@ -11,8 +12,14 @@ public class ModelNotifier {
     private Model.tictactoe GameLogic;
     private ViewUpdater UIUpdater;
 
-    public ModelNotifier(String gametype, JLabel[] labelCollection, ViewUpdater UIUpdater) {
-        GameBoard = new CardCollection(gametype, labelCollection);
+    public ModelNotifier(String AIDifficulty, String gameType, JLabel[] labelCollection, ViewUpdater UIUpdater) {
+        GameBoard = new CardCollection(gameType, labelCollection);
+            GameLogic = new tictactoe(AIDifficulty);
+        this.UIUpdater = UIUpdater;
+    }
+
+    public ModelNotifier(String gameType, JLabel[] labelCollection, ViewUpdater UIUpdater) {
+        GameBoard = new CardCollection(gameType, labelCollection);
         GameLogic = new tictactoe();
         this.UIUpdater = UIUpdater;
     }

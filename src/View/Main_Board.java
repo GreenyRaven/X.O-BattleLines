@@ -62,6 +62,9 @@ public class Main_Board extends JFrame {
     private JLabel nullWinCountLabel;
     private JLabel crossWinCountLabel;
     private JPanel gameStepPanel;
+    private JCheckBox withAI;
+    private JComboBox firstStep;
+    private JLabel gameDiffLabel;
 
     ModelNotifier ModelNotifier;
     ViewUpdater UIUpdater;
@@ -70,17 +73,19 @@ public class Main_Board extends JFrame {
     private int nullWinCount = 0;
     private String gametype;
     private String gameDifficulty;
+    private boolean gameAgainstAI;
 
     public Main_Board() {
         getContentPane().add(main_panel);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLabelVisibility("6x6", false, false);
         setLabelListeners();
+        setOtherListeners();
         step.setVisible(false);
         gameStep.setVisible(false);
         endGamePanel.setVisible(false);
-        launchButton.addActionListener(e -> setGameBoard((String) Objects.requireNonNull(gametypeBox.getSelectedItem())));
-        newGameButton.addActionListener(e -> newGame());
+        gameDiffLabel.setVisible(false);
+        gamediffBox.setVisible(false);
         pack();
         setVisible(true);
     }
@@ -89,15 +94,19 @@ public class Main_Board extends JFrame {
         locked = false;
     }
 
-    public void endGame() {
-        if (gameStep.getText().equals("Нолики")) {
-            winnerLabel.setText("Победа за нулями!");
-            nullWinCount++;
-            nullWinCountLabel.setText(String.valueOf(nullWinCount));
+    public void endGame(boolean hasWinner) {
+        if (hasWinner) {
+            if (gameStep.getText().equals("Нолики")) {
+                winnerLabel.setText("Победа за нулями!");
+                nullWinCount++;
+                nullWinCountLabel.setText(String.valueOf(nullWinCount));
+            } else {
+                winnerLabel.setText("Победа за крестами!");
+                crossWinCount++;
+                crossWinCountLabel.setText(String.valueOf(crossWinCount));
+            }
         } else {
-            winnerLabel.setText("Победа за крестами!");
-            crossWinCount++;
-            crossWinCountLabel.setText(String.valueOf(crossWinCount));
+            winnerLabel.setText("Ничья!");
         }
         endGamePanel.setVisible(true);
         pack();
@@ -219,8 +228,26 @@ public class Main_Board extends JFrame {
         }
     }
 
+    private void setOtherListeners() {
+        withAI.addActionListener(e -> {
+            if (!withAI.isSelected()) {
+                gameDiffLabel.setVisible(false);
+                gamediffBox.setVisible(false);
+            } else {
+                gameDiffLabel.setVisible(true);
+                gamediffBox.setVisible(true);
+
+            }
+            pack();
+        });
+        launchButton.addActionListener(e -> setGameBoard((String) Objects.requireNonNull(gametypeBox.getSelectedItem())));
+        newGameButton.addActionListener(e -> newGame());
+    }
+
     private void setGameBoard(String gametype) {
         this.gametype = gametype;
+        this.gameAgainstAI = withAI.isSelected();
+        gameDifficulty = (String) gamediffBox.getSelectedItem();
         gameDifficulty = (String) gamediffBox.getSelectedItem();
         controlPanel.setVisible(false);
         endGamePanel.setVisible(false);
@@ -232,12 +259,20 @@ public class Main_Board extends JFrame {
             case "3x3" -> {
                 setLabelVisibility("3x3", true, true);
                 UIUpdater = new ViewUpdater(this);
-                ModelNotifier = new ModelNotifier("3x3", returnBasicLabelCollection(), UIUpdater);
+                if (gameAgainstAI) {
+                    ModelNotifier = new ModelNotifier(gameDifficulty, "3x3", returnBasicLabelCollection(), UIUpdater);
+                } else {
+                    ModelNotifier = new ModelNotifier("3x3", returnBasicLabelCollection(), UIUpdater);
+                }
             }
             case "6x6" -> {
                 setLabelVisibility("6x6", true, true);
                 UIUpdater = new ViewUpdater(this);
-                ModelNotifier = new ModelNotifier("6x6", returnFullLabelCollection(), UIUpdater);
+                if (gameAgainstAI) {
+                    ModelNotifier = new ModelNotifier(gameDifficulty, "6x6", returnFullLabelCollection(), UIUpdater);
+                } else {
+                    ModelNotifier = new ModelNotifier("6x6", returnFullLabelCollection(), UIUpdater);
+                }
             }
         }
         pack();

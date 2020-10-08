@@ -34,13 +34,17 @@ public final class CardCollection {
     void updateCards(Card[] thoseCards, String toStatus) {
         for (Card card : thoseCards) {
             switch (toStatus) {
-                case "blank" -> card.setIconType("blank");
-                case "zero" -> card.setIconType("null");
-                case "cross" -> card.setIconType("cross");
-                case "winCross1" -> card.setIconType("winCross1");
-                case "winCross2" -> card.setIconType("winCross2");
-                case "winZero1" -> card.setIconType("winNull1");
-                case "winZero2" -> card.setIconType("winNull2");
+                case "Blank" -> card.setIconType("blank");
+                case "Null_clear" -> card.setIconType("null");
+                case "Cross_clear" -> card.setIconType("cross");
+                case "Cross_Diagonal_LD" -> card.setIconType("winCross1");
+                case "Cross_Diagonal_RD" -> card.setIconType("winCross2");
+                case "Cross_Horizontal" -> card.setIconType("winCross3");
+                case "Cross_Vertical" -> card.setIconType("winCross4");
+                case "Null_Diagonal_LD" -> card.setIconType("winNull1");
+                case "Null_Diagonal_RD" -> card.setIconType("winNull2");
+                case "Null_Horizontal" -> card.setIconType("winNull3");
+                case "Null_Vertical" -> card.setIconType("winNull4");
             }
         }
     }

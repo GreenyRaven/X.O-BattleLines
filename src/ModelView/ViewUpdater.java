@@ -15,10 +15,27 @@ public class ViewUpdater {
         View.nextStep();
     }
 
-    public void endThisGame(int[] winningCards, String withStatus) {
-        for (int index : winningCards) {
-            CardCollection.GameBoard.getCardCollection()[index].setIconType(withStatus);
+    public void endThisGameWithWinner(int[] winningCards, String withStatus) {
+        for (CardCollection.Card card : CardCollection.GameBoard.getCardCollection()) {
+            for (int index : winningCards) {
+                if (card.getIndex() == index) {
+                    CardCollection.GameBoard.updateCards(new CardCollection.Card[]{card}, withStatus);
+                }
+            }
         }
-        View.endGame();
+        View.endGame(true);
+    }
+
+    public void endThisGameWithoutWinner() {
+        View.endGame(false);
+    }
+
+    public void makeAIStep(int toIndex, String withStatus) {
+        for (CardCollection.Card card : CardCollection.GameBoard.getCardCollection()) {
+            if (card.getIndex() == toIndex) {
+                CardCollection.GameBoard.updateCards(new CardCollection.Card[]{card}, withStatus);
+            }
+        }
+        View.nextStep();
     }
 }
