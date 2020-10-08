@@ -96,6 +96,7 @@ public class Main_Board extends JFrame {
         } else {
             gameStep.setText("Нолики");
         }
+        pack();
         locked = false;
     }
 
@@ -118,7 +119,11 @@ public class Main_Board extends JFrame {
     }
 
     private void newGame() {
-        ModelNotifier.startNewGame();
+        if (gameAgainstAI) {
+            ModelNotifier.startNewGame(gameDifficulty);
+        } else {
+            ModelNotifier.startNewGame();
+        }
         endGamePanel.setVisible(false);
         setLabelVisibility(gametype, true, true);
         controlPanel.setVisible(false);

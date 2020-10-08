@@ -10,7 +10,7 @@ import static ModelView.CardCollection.GameBoard;
 //updates CardCollection using View data
 public class ModelNotifier {
     private Model.tictactoe GameLogic;
-    private ViewUpdater UIUpdater;
+    private final ViewUpdater UIUpdater;
 
     public ModelNotifier(String AIDifficulty, String gameType, JLabel[] labelCollection, ViewUpdater UIUpdater) {
         GameBoard = new CardCollection(gameType, labelCollection);
@@ -26,6 +26,11 @@ public class ModelNotifier {
 
     public void startNewGame() {
         GameLogic = new tictactoe();
+        GameBoard.updateCards(GameBoard.getCardCollection(), "blank");
+    }
+
+    public void startNewGame(String AIGameDifficulty) {
+        GameLogic = new tictactoe(AIGameDifficulty);
         GameBoard.updateCards(GameBoard.getCardCollection(), "blank");
     }
 
