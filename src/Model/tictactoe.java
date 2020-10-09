@@ -9,7 +9,7 @@ import java.util.Random;
 import weka.classifiers.Classifier;
 import weka.core.*;
 
-public class tictactoe {
+public class Tictactoe {
     private int[][] board;
     private int player;
     private int row;
@@ -21,41 +21,72 @@ public class tictactoe {
     private int diag_sec;
     private int[] won;
     private String img;
+    private int ai_move;
+    private String ai_fig;
 
-    public tictactoe(ViewUpdater UIUpdater, String gameType) {
-        board = Create_board();
-        System.out.println("Поле:");
+    private ViewUpdater UIUpdater;
+    private String gameType; // field 3x3 or 6x6
+    private String aiDifficulty;
+
+
+    public Tictactoe(ViewUpdater UIUpdater, String gameType) {
+        this.UIUpdater = UIUpdater;
+        this.gameType = gameType;
+
+        this.board = create_Board();
+        System.out.println("Field:");
         System.out.println(Arrays.deepToString(board));
         System.out.println("----------");
     }
 
-    public tictactoe(ViewUpdater UIUpdater, String aiDifficulty, String gameType) {
-        board = Create_board();
-        System.out.println("Поле:");
+    public Tictactoe(ViewUpdater UIUpdater, String aiDifficulty, String gameType) {
+        this.UIUpdater = UIUpdater;
+        this.gameType = gameType;
+        this.aiDifficulty = aiDifficulty;
+
+        this.board = create_Board();
+        System.out.println("Field:");
         System.out.println(Arrays.deepToString(board));
         System.out.println("----------");
     }
 
-    public void test (int index, String gameStep, ViewUpdater UIUpdater) {
+    public void play(int index, String gameStep, ViewUpdater UIUpdater) throws Exception {
+        turn(index, gameStep);// now i have: player , row , col
+        place(this.board, this.player, this.row, this.col);
+        System.out.println("Turn: " + Arrays.deepToString(this.board));
         UIUpdater.toNextStep();
-    }
-    /*
-    public void Play(int index, String gamestep, ViewUpdater UIUpdater) {
-        tictactoe game = new tictactoe(UIUpdater);
-        game.Turn(index, gamestep);//to variable: place(row and col) and player
-//        game.Make_a_move(this.board, this.player, this.row, this.col);
-        game.Place(this.board, this.player, this.row, this.col);
-        if (game.Win_check(this.board, this.player)) {
-            game.Won_place();
-            UIUpdater.endThisGameWithWinner(this.won, this.img);
-        } else {
-            //draw
+//        temporary !
+        switch (aiDifficulty) {
+            case "Hard" -> {
+                placeAI(this.board, this.player);
+                System.out.println("Turn AI hard: " + Arrays.deepToString(this.board));
+                encode_ai_fig();
+                if (this.player == 1){
+                    this.player = 2;
+                }else{
+                    this.player = 1;
+                }
+                UIUpdater.makeAIStep(this.ai_move, this.ai_fig);
+                win_and_draw_check();
+            }
+            case "Easy" -> {
+                random_placement(this.board, this.player);
+                System.out.println("Turn AI ez: " + Arrays.deepToString(this.board));
+                encode_ai_fig();
+                if (this.player == 1){
+                    this.player = 2;
+                }else{
+                    this.player = 1;
+                }
+                UIUpdater.makeAIStep(this.ai_move, this.ai_fig);
+                win_and_draw_check();
+            }
         }
-        UIUpdater.toNextStep();
-    } */
+        win_and_draw_check();
+    }
 
     // decode turn
-    private void Turn(int index, String figure) {
+    private void turn(int index, String figure) {
         if (figure.equals("Крестики")) {
             this.player = 1;
         } else {
@@ -103,56 +134,128 @@ public class tictactoe {
         System.out.println("Row: " + row + " Col: " + col);
     }
 
+    // encode turn
+    private void encode_ai_move(int[] placement){
+        if (placement[0] == 0 && placement[1] == 0 ){
+            this.ai_move = 0;
+        }
+        if (placement[0] == 0 && placement[1] == 1 ){
+            this.ai_move = 1;
+        }
+        if (placement[0] == 0 && placement[1] == 2 ){
+            this.ai_move = 2;
+        }
+        if (placement[0] == 1 && placement[1] == 0 ){
+            this.ai_move = 3;
+        }
+        if (placement[0] == 1 && placement[1] == 1 ){
+            this.ai_move = 4;
+        }
+        if (placement[0] == 1 && placement[1] == 2 ){
+            this.ai_move = 5;
+        }
+        if (placement[0] == 2 && placement[1] == 0 ){
+            this.ai_move = 6;
+        }
+        if (placement[0] == 2 && placement[1] == 2 ){
+            this.ai_move = 7;
+        }
+        if (placement[0] == 2 && placement[1] == 2 ){
+            this.ai_move = 8;
+        }
+    }
+
+    // encode fig
+    private void encode_ai_fig(){
+        if (this.player == 1) {
+            this.ai_fig = "Крестики";
+        } else {
+            this.ai_fig = "Нолики";
+        }
+    }
+
     // encode won_place
-    private void Won_place() {
+    private void won_place() {
         switch (this.num_row) {
             case 0 -> {
                 this.won = new int[]{0, 1, 2};
-                this.img = "";
+                if (this.player == 1){
+                    this.img = "Cross_Horizontal";
+                }else{
+                    this.img = "Null_Horizontal";
+                }
             }
             case 1 -> {
                 this.won = new int[]{3, 4, 5};
-                this.img = "";
+                if (this.player == 1){
+                    this.img = "Cross_Horizontal";
+                }else{
+                    this.img = "Null_Horizontal";
+                }
             }
             case 2 -> {
                 this.won = new int[]{6, 7, 8};
-                this.img = "";
+                if (this.player == 1){
+                    this.img = "Cross_Horizontal";
+                }else{
+                    this.img = "Null_Horizontal";
+                }
             }
         }
         switch (this.num_col) {
             case 0 -> {
                 this.won = new int[]{0, 3, 6};
-                this.img = "";
+                if (this.player == 1){
+                    this.img = "Cross_Vertical";
+                }else{
+                    this.img = "Null_Vertical";
+                }
             }
             case 1 -> {
                 this.won = new int[]{1, 4, 7};
-                this.img = "";
+                if (this.player == 1){
+                    this.img = "Cross_Vertical";
+                }else{
+                    this.img = "Null_Vertical";
+                }
             }
             case 2 -> {
                 this.won = new int[]{2, 5, 8};
-                this.img = "";
+                if (this.player == 1){
+                    this.img = "Cross_Vertical";
+                }else{
+                    this.img = "Null_Vertical";
+                }
             }
         }
         if (this.diag_princ == 1) {
             this.won = new int[]{0, 4, 8};
-            this.img = "";
+            if (this.player == 1){
+                this.img = "Cross_Diagonal_RD";
+            }else{
+                this.img = "Null_Diagonal_RD";
+            }
         }
         if (this.diag_sec == 1) {
             this.won = new int[]{2, 4, 6};
-            this.img = "";
+            if (this.player == 1){
+                this.img = "Cross_Diagonal_LD";
+            }else{
+                this.img = "Null_Diagonal_LD";
+            }
         }
     }
 
     //3x3
-    private int[][] Create_board() {
+    private int[][] create_Board() {
         return new int[3][3];
     }
 
-    private void Place(int[][] board, int player, int row, int col) {
+    private void place(int[][] board, int player, int row, int col) {
         board[row][col] = player;
     }
 
-    private void Place_AI(int[][] board, int player) throws Exception {
+    private void placeAI(int[][] board, int player) throws Exception {
         // create dataset in memory
         Attribute p0 = new Attribute("p0");
         Attribute p1 = new Attribute("p1");
@@ -180,18 +283,18 @@ public class tictactoe {
         attributes.add(p7);
         attributes.add(p8);
         attributes.add(cls);
-        Instances dataset = new Instances("tictactoe-move-data", attributes, 0);//накапливаются?
+        Instances dataset = new Instances("tictactoe-move-data", attributes, 0);//stacking?
 
         Classifier mlp = (Classifier) weka.core.SerializationHelper.read("model_mlp.model");
 
-        ArrayList<int[]> possibilities = Possibilities(board);
+        ArrayList<int[]> possibilities = possibilities(board);
         int[] best_move = new int[2];
         double best_dist = 0.0;
         for (int[] possible_move : possibilities) {
             //Instances dataset = new Instances("tictactoe-move-data", attributes, 0);
             int[][] current_board_copy = Arrays.stream(board).map(int[]::clone).toArray(int[][]::new);
             double[] predict_board = new double[dataset.numAttributes()];//for dataset
-            Place(current_board_copy, player, possible_move[0], possible_move[1]);
+            place(current_board_copy, player, possible_move[0], possible_move[1]);
             int i = 0;
             for (int[] row : current_board_copy) {
                 for (int value : row) {
@@ -218,10 +321,11 @@ public class tictactoe {
             }
 
         }
-        Place(board, player, best_move[0], best_move[1]);
+        place(board, player, best_move[0], best_move[1]);
+        encode_ai_move(best_move);
     }
 
-    private ArrayList<int[]> Possibilities(int[][] board) {
+    private ArrayList<int[]> possibilities(int[][] board) {
         ArrayList<int[]> possibilities = new ArrayList<>();
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
@@ -233,17 +337,18 @@ public class tictactoe {
         return possibilities;
     }
 
-    private void Random_placement(int[][] board, int player) {
-        ArrayList<int[]> possibilities = Possibilities(board);
+    private void random_placement(int[][] board, int player) {
+        ArrayList<int[]> possibilities = possibilities(board);
         if (!possibilities.isEmpty()) {
             Random random = new Random();
             //random.setSeed(1);
-            int[] position = possibilities.get(random.nextInt(possibilities.size()));//[1,2]
-            Place(board, player, position[0], position[1]);
+            int[] position = possibilities.get(random.nextInt(possibilities.size()));
+            place(board, player, position[0], position[1]);
+            encode_ai_move(position);
         }
     }
 
-    private boolean Win_check(int[][] board, int player) {
+    private boolean win_check(int[][] board, int player) {
         // row
         int num_row = 0;
         for (int[] row : board) {
@@ -311,17 +416,15 @@ public class tictactoe {
         return false;
     }
 
-//    private void Make_a_move(int[][] board, int player, int row, int col) {
-////        if (ai == True){
-////
-////        }
-//        Place(board, player, row, col);
-//        System.out.println("Ход:");
-//        System.out.println(Arrays.deepToString(board));
-//        if (Win_check(board, player)) {
-//            System.out.println("Player " + player + " won!");
-//        } else if (Possibilities(board).isEmpty()) {
-//            System.out.println("No one won!");
-//        }
-//    }
+    private void win_and_draw_check(){
+        if (win_check(this.board, player)) {
+            System.out.println("Player " + this.player + " won!");
+            won_place();// now i have: won , img
+            UIUpdater.endThisGameWithWinner(this.won, img);
+        } else if (possibilities(this.board).isEmpty()) {
+            System.out.println("No one won!");
+            UIUpdater.endThisGameWithoutWinner();
+        }
+    }
+
 }
