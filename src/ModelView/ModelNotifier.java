@@ -45,7 +45,7 @@ public class ModelNotifier {
         }
     }
 
-    private void toModel(int index, String gameStep) throws Exception {
+    private void toModel(int index, String gameStep) {
         GameLogic.play(index, gameStep, UIUpdater);
     }
 

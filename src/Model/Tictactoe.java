@@ -50,39 +50,42 @@ public class Tictactoe {
         System.out.println("----------");
     }
 
-    public void play(int index, String gameStep, ViewUpdater UIUpdater) throws Exception {
-        turn(index, gameStep);// now i have: player , row , col
-        place(this.board, this.player, this.row, this.col);
-        System.out.println("Turn: " + Arrays.deepToString(this.board));
-        UIUpdater.toNextStep();
+    public void play(int index, String gameStep, ViewUpdater UIUpdater) {
+        try {
+            turn(index, gameStep);// now i have: player , row , col
+            place(this.board, this.player, this.row, this.col);
+            System.out.println("Turn: " + Arrays.deepToString(this.board));
+            UIUpdater.toNextStep();
 //        temporary !
-        switch (aiDifficulty) {
-            case "Hard" -> {
-                placeAI(this.board, this.player);
-                System.out.println("Turn AI hard: " + Arrays.deepToString(this.board));
-                encode_ai_fig();
-                if (this.player == 1){
-                    this.player = 2;
-                }else{
-                    this.player = 1;
+            switch (aiDifficulty) {
+                case "Hard" -> {
+                    placeAI(this.board, this.player);
+                    System.out.println("Turn AI hard: " + Arrays.deepToString(this.board));
+                    encode_ai_fig();
+                    if (this.player == 1) {
+                        this.player = 2;
+                    } else {
+                        this.player = 1;
+                    }
+                    UIUpdater.makeAIStep(this.ai_move, this.ai_fig);
+                    win_and_draw_check();
                 }
-                UIUpdater.makeAIStep(this.ai_move, this.ai_fig);
-                win_and_draw_check();
-            }
-            case "Easy" -> {
-                random_placement(this.board, this.player);
-                System.out.println("Turn AI ez: " + Arrays.deepToString(this.board));
-                encode_ai_fig();
-                if (this.player == 1){
-                    this.player = 2;
-                }else{
-                    this.player = 1;
+                case "Easy" -> {
+                    random_placement(this.board, this.player);
+                    System.out.println("Turn AI ez: " + Arrays.deepToString(this.board));
+                    encode_ai_fig();
+                    if (this.player == 1) {
+                        this.player = 2;
+                    } else {
+                        this.player = 1;
+                    }
+                    UIUpdater.makeAIStep(this.ai_move, this.ai_fig);
+                    win_and_draw_check();
                 }
-                UIUpdater.makeAIStep(this.ai_move, this.ai_fig);
-                win_and_draw_check();
             }
+            win_and_draw_check();
+        } catch (Exception ignored) {
         }
-        win_and_draw_check();
     }
 
     // decode turn
@@ -135,38 +138,38 @@ public class Tictactoe {
     }
 
     // encode turn
-    private void encode_ai_move(int[] placement){
-        if (placement[0] == 0 && placement[1] == 0 ){
+    private void encode_ai_move(int[] placement) {
+        if (placement[0] == 0 && placement[1] == 0) {
             this.ai_move = 0;
         }
-        if (placement[0] == 0 && placement[1] == 1 ){
+        if (placement[0] == 0 && placement[1] == 1) {
             this.ai_move = 1;
         }
-        if (placement[0] == 0 && placement[1] == 2 ){
+        if (placement[0] == 0 && placement[1] == 2) {
             this.ai_move = 2;
         }
-        if (placement[0] == 1 && placement[1] == 0 ){
+        if (placement[0] == 1 && placement[1] == 0) {
             this.ai_move = 3;
         }
-        if (placement[0] == 1 && placement[1] == 1 ){
+        if (placement[0] == 1 && placement[1] == 1) {
             this.ai_move = 4;
         }
-        if (placement[0] == 1 && placement[1] == 2 ){
+        if (placement[0] == 1 && placement[1] == 2) {
             this.ai_move = 5;
         }
-        if (placement[0] == 2 && placement[1] == 0 ){
+        if (placement[0] == 2 && placement[1] == 0) {
             this.ai_move = 6;
         }
-        if (placement[0] == 2 && placement[1] == 2 ){
+        if (placement[0] == 2 && placement[1] == 2) {
             this.ai_move = 7;
         }
-        if (placement[0] == 2 && placement[1] == 2 ){
+        if (placement[0] == 2 && placement[1] == 2) {
             this.ai_move = 8;
         }
     }
 
     // encode fig
-    private void encode_ai_fig(){
+    private void encode_ai_fig() {
         if (this.player == 1) {
             this.ai_fig = "Крестики";
         } else {
@@ -179,25 +182,25 @@ public class Tictactoe {
         switch (this.num_row) {
             case 0 -> {
                 this.won = new int[]{0, 1, 2};
-                if (this.player == 1){
+                if (this.player == 1) {
                     this.img = "Cross_Horizontal";
-                }else{
+                } else {
                     this.img = "Null_Horizontal";
                 }
             }
             case 1 -> {
                 this.won = new int[]{3, 4, 5};
-                if (this.player == 1){
+                if (this.player == 1) {
                     this.img = "Cross_Horizontal";
-                }else{
+                } else {
                     this.img = "Null_Horizontal";
                 }
             }
             case 2 -> {
                 this.won = new int[]{6, 7, 8};
-                if (this.player == 1){
+                if (this.player == 1) {
                     this.img = "Cross_Horizontal";
-                }else{
+                } else {
                     this.img = "Null_Horizontal";
                 }
             }
@@ -205,42 +208,42 @@ public class Tictactoe {
         switch (this.num_col) {
             case 0 -> {
                 this.won = new int[]{0, 3, 6};
-                if (this.player == 1){
+                if (this.player == 1) {
                     this.img = "Cross_Vertical";
-                }else{
+                } else {
                     this.img = "Null_Vertical";
                 }
             }
             case 1 -> {
                 this.won = new int[]{1, 4, 7};
-                if (this.player == 1){
+                if (this.player == 1) {
                     this.img = "Cross_Vertical";
-                }else{
+                } else {
                     this.img = "Null_Vertical";
                 }
             }
             case 2 -> {
                 this.won = new int[]{2, 5, 8};
-                if (this.player == 1){
+                if (this.player == 1) {
                     this.img = "Cross_Vertical";
-                }else{
+                } else {
                     this.img = "Null_Vertical";
                 }
             }
         }
         if (this.diag_princ == 1) {
             this.won = new int[]{0, 4, 8};
-            if (this.player == 1){
+            if (this.player == 1) {
                 this.img = "Cross_Diagonal_RD";
-            }else{
+            } else {
                 this.img = "Null_Diagonal_RD";
             }
         }
         if (this.diag_sec == 1) {
             this.won = new int[]{2, 4, 6};
-            if (this.player == 1){
+            if (this.player == 1) {
                 this.img = "Cross_Diagonal_LD";
-            }else{
+            } else {
                 this.img = "Null_Diagonal_LD";
             }
         }
@@ -315,7 +318,7 @@ public class Tictactoe {
             System.out.println("Class label: " + clsLabel);
             System.out.println("Distribution for classes: " + Utils.arrayToString(dist_labels));
 
-            if (dist_labels[player] > best_dist){
+            if (dist_labels[player] > best_dist) {
                 best_dist = dist_labels[player];
                 best_move = possible_move;
             }
@@ -416,7 +419,7 @@ public class Tictactoe {
         return false;
     }
 
-    private void win_and_draw_check(){
+    private void win_and_draw_check() {
         if (win_check(this.board, player)) {
             System.out.println("Player " + this.player + " won!");
             won_place();// now i have: won , img
@@ -428,3 +431,4 @@ public class Tictactoe {
     }
 
 }
+
