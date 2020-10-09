@@ -26,12 +26,12 @@ public class ModelNotifier {
 
     public void startNewGame(String gameType) {
         GameLogic = new Tictactoe(UIUpdater, gameType);
-        GameBoard.updateCards(GameBoard.getCardCollection(), "blank");
+        GameBoard.updateCards(GameBoard.getCardCollection(), "Blank");
     }
 
     public void startNewGame(String AIGameDifficulty, String gameType) {
         GameLogic = new Tictactoe(UIUpdater, AIGameDifficulty, gameType);
-        GameBoard.updateCards(GameBoard.getCardCollection(), "blank");
+        GameBoard.updateCards(GameBoard.getCardCollection(), "Blank");
     }
 
     public void commitTransfer(JLabel affectedLabel, String gameStep) {

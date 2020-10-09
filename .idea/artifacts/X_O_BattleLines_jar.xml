@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="X.O-BattleLines:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/X_O_BattleLines_jar</output-path>
+    <root id="archive" name="X.O-BattleLines.jar">
+      <element id="module-output" name="X.O-BattleLines" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/weka.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

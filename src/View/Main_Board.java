@@ -98,7 +98,6 @@ public class Main_Board extends JFrame {
         }
         pack();
         locked = false;
-        System.out.println("Locked = false");
     }
 
     public void endGame(boolean hasWinner) {
@@ -135,7 +134,6 @@ public class Main_Board extends JFrame {
     private void sendData(JLabel affectedLabel) {
         if (!locked) {
             locked = true;
-            System.out.print("Locked = true");
             ModelNotifier.commitTransfer(affectedLabel, gameStep.getText());
         }
     }
