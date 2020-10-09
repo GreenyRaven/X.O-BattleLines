@@ -36,8 +36,8 @@ public class tictactoe {
         System.out.println("----------");
     }
 
-    public void test (int index, String gameStep) {
-
+    public void test (int index, String gameStep, ViewUpdater UIUpdater) {
+        UIUpdater.toNextStep();
     }
     /*
     public void Play(int index, String gamestep, ViewUpdater UIUpdater) {

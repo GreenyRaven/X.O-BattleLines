@@ -38,15 +38,15 @@ public class ModelNotifier {
         int indexOfCard = findCardIndexByLabel(affectedLabel);
         try {
             if (!GameBoard.getCardCollection()[indexOfCard].isPushed()) {
-                toModel(indexOfCard, gameStep);
                 toCardCollection(indexOfCard, gameStep);
+                toModel(indexOfCard, gameStep);
             }
         } catch (Exception ignored) {
         }
     }
 
     private void toModel(int index, String gameStep) {
-        GameLogic.test(index, gameStep);
+        GameLogic.test(index, gameStep, UIUpdater);
     }
 
     private void toCardCollection(int desiredIndex, String gameStep) {
