@@ -1,6 +1,6 @@
 package ModelView;
 
-import Model.tictactoe;
+import Model.Tictactoe;
 
 import javax.swing.*;
 
@@ -9,28 +9,28 @@ import static ModelView.CardCollection.GameBoard;
 //transports View data to the Model
 //updates CardCollection using View data
 public class ModelNotifier {
-    private Model.tictactoe GameLogic;
+    private Model.Tictactoe GameLogic;
     private final ViewUpdater UIUpdater;
 
     public ModelNotifier(String AIDifficulty, String gameType, JLabel[] labelCollection, ViewUpdater UIUpdater) {
         GameBoard = new CardCollection(gameType, labelCollection);
-        GameLogic = new tictactoe(UIUpdater, AIDifficulty, gameType);
+        GameLogic = new Tictactoe(UIUpdater, AIDifficulty, gameType);
         this.UIUpdater = UIUpdater;
     }
 
     public ModelNotifier(String gameType, JLabel[] labelCollection, ViewUpdater UIUpdater) {
         GameBoard = new CardCollection(gameType, labelCollection);
-        GameLogic = new tictactoe(UIUpdater, gameType);
+        GameLogic = new Tictactoe(UIUpdater, gameType);
         this.UIUpdater = UIUpdater;
     }
 
     public void startNewGame(String gameType) {
-        GameLogic = new tictactoe(UIUpdater, gameType);
+        GameLogic = new Tictactoe(UIUpdater, gameType);
         GameBoard.updateCards(GameBoard.getCardCollection(), "blank");
     }
 
     public void startNewGame(String AIGameDifficulty, String gameType) {
-        GameLogic = new tictactoe(UIUpdater, AIGameDifficulty, gameType);
+        GameLogic = new Tictactoe(UIUpdater, AIGameDifficulty, gameType);
         GameBoard.updateCards(GameBoard.getCardCollection(), "blank");
     }
 
@@ -45,8 +45,8 @@ public class ModelNotifier {
         }
     }
 
-    private void toModel(int index, String gameStep) {
-        GameLogic.test(index, gameStep, UIUpdater);
+    private void toModel(int index, String gameStep) throws Exception {
+        GameLogic.play(index, gameStep, UIUpdater);
     }
 
     private void toCardCollection(int desiredIndex, String gameStep) {
