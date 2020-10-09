@@ -21,7 +21,7 @@
               <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
-              <text value="11"/>
+              <text value=""/>
             </properties>
           </component>
           <hspacer id="fe7e3">
@@ -42,7 +42,7 @@
               <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
-              <text value="12"/>
+              <text value=""/>
             </properties>
           </component>
           <component id="772a7" class="javax.swing.JLabel" binding="s_21">
@@ -51,7 +51,7 @@
               <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
-              <text value="21"/>
+              <text value=""/>
             </properties>
           </component>
           <component id="43c45" class="javax.swing.JLabel" binding="s_22">
@@ -60,7 +60,7 @@
               <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
-              <text value="22"/>
+              <text value=""/>
             </properties>
           </component>
           <hspacer id="d4a08">
@@ -75,7 +75,7 @@
               <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
-              <text value="13"/>
+              <text value=""/>
             </properties>
           </component>
           <component id="a2905" class="javax.swing.JLabel" binding="s_23">
@@ -84,7 +84,7 @@
               <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
-              <text value="23"/>
+              <text value=""/>
             </properties>
           </component>
           <vspacer id="174ab">
@@ -99,7 +99,7 @@
               <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
-              <text value="31"/>
+              <text value=""/>
             </properties>
           </component>
           <component id="d2c1" class="javax.swing.JLabel" binding="s_32">
@@ -108,7 +108,7 @@
               <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
-              <text value="32"/>
+              <text value=""/>
             </properties>
           </component>
           <component id="f3e19" class="javax.swing.JLabel" binding="s_33">
@@ -117,7 +117,7 @@
               <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
-              <text value="33"/>
+              <text value=""/>
             </properties>
           </component>
           <vspacer id="6f756">
@@ -148,7 +148,7 @@
               <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
-              <text value="14"/>
+              <text value=""/>
             </properties>
           </component>
           <hspacer id="cae53">
@@ -169,7 +169,7 @@
               <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
-              <text value="24"/>
+              <text value=""/>
             </properties>
           </component>
           <component id="860b" class="javax.swing.JLabel" binding="s_15">
@@ -178,7 +178,7 @@
               <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
-              <text value="15"/>
+              <text value=""/>
             </properties>
           </component>
           <component id="f8421" class="javax.swing.JLabel" binding="s_25">
@@ -187,7 +187,7 @@
               <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
-              <text value="25"/>
+              <text value=""/>
             </properties>
           </component>
           <vspacer id="128b8">
@@ -202,7 +202,7 @@
               <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
-              <text value="34"/>
+              <text value=""/>
             </properties>
           </component>
           <component id="47ab6" class="javax.swing.JLabel" binding="s_35">
@@ -211,7 +211,7 @@
               <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
-              <text value="35"/>
+              <text value=""/>
             </properties>
           </component>
           <hspacer id="d1e2a">
@@ -226,7 +226,7 @@
               <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
-              <text value="16"/>
+              <text value=""/>
             </properties>
           </component>
           <component id="b7169" class="javax.swing.JLabel" binding="s_26">
@@ -235,7 +235,7 @@
               <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
-              <text value="26"/>
+              <text value=""/>
             </properties>
           </component>
           <component id="9e78f" class="javax.swing.JLabel" binding="s_36">
@@ -244,7 +244,7 @@
               <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
-              <text value="36"/>
+              <text value=""/>
             </properties>
           </component>
           <vspacer id="c309">
@@ -269,7 +269,7 @@
               <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
-              <text value="41"/>
+              <text value=""/>
             </properties>
           </component>
           <hspacer id="76b80">
@@ -290,7 +290,7 @@
               <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
-              <text value="42"/>
+              <text value=""/>
             </properties>
           </component>
           <component id="cefd0" class="javax.swing.JLabel" binding="s_51">
@@ -299,7 +299,7 @@
               <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
-              <text value="51"/>
+              <text value=""/>
             </properties>
           </component>
           <component id="3f152" class="javax.swing.JLabel" binding="s_52">
@@ -308,7 +308,7 @@
               <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
-              <text value="52"/>
+              <text value=""/>
             </properties>
           </component>
           <vspacer id="c20ea">
@@ -323,7 +323,7 @@
               <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
-              <text value="61"/>
+              <text value=""/>
             </properties>
           </component>
           <component id="3ba6e" class="javax.swing.JLabel" binding="s_62">
@@ -332,7 +332,7 @@
               <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
-              <text value="62"/>
+              <text value=""/>
             </properties>
           </component>
           <hspacer id="538cf">
@@ -347,7 +347,7 @@
               <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
-              <text value="43"/>
+              <text value=""/>
             </properties>
           </component>
           <component id="14743" class="javax.swing.JLabel" binding="s_53">
@@ -356,7 +356,7 @@
               <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
-              <text value="53"/>
+              <text value=""/>
             </properties>
           </component>
           <component id="fafaf" class="javax.swing.JLabel" binding="s_63">
@@ -365,7 +365,7 @@
               <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
-              <text value="63"/>
+              <text value=""/>
             </properties>
           </component>
           <hspacer id="5a691">
@@ -390,7 +390,7 @@
               <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
-              <text value="44"/>
+              <text value=""/>
             </properties>
           </component>
           <hspacer id="ab540">
@@ -411,7 +411,7 @@
               <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
-              <text value="45"/>
+              <text value=""/>
             </properties>
           </component>
           <hspacer id="9a651">
@@ -426,7 +426,7 @@
               <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
-              <text value="46"/>
+              <text value=""/>
             </properties>
           </component>
           <component id="1e9cb" class="javax.swing.JLabel" binding="s_54">
@@ -435,7 +435,7 @@
               <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
-              <text value="54"/>
+              <text value=""/>
             </properties>
           </component>
           <component id="a06a" class="javax.swing.JLabel" binding="s_55">
@@ -444,7 +444,7 @@
               <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
-              <text value="55"/>
+              <text value=""/>
             </properties>
           </component>
           <component id="13f47" class="javax.swing.JLabel" binding="s_56">
@@ -453,7 +453,7 @@
               <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
-              <text value="56"/>
+              <text value=""/>
             </properties>
           </component>
           <component id="3ec4b" class="javax.swing.JLabel" binding="s_64">
@@ -462,7 +462,7 @@
               <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
-              <text value="64"/>
+              <text value=""/>
             </properties>
           </component>
           <vspacer id="72127">
@@ -477,7 +477,7 @@
               <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
-              <text value="65"/>
+              <text value=""/>
             </properties>
           </component>
           <component id="4af07" class="javax.swing.JLabel" binding="s_66">
@@ -486,7 +486,7 @@
               <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
-              <text value="66"/>
+              <text value=""/>
             </properties>
           </component>
         </children>
