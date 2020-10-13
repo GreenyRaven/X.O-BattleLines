@@ -91,29 +91,44 @@ public class Main_Board extends JFrame {
     }
 
     public void nextStep() {
-        if (gameStep.getText().equals("Нолики")) {
-            gameStep.setText("Крестики");
+        if (!gameAgainstAI) {
+            if (gameStep.getText().equals("Нолики")) {
+                gameStep.setText("Крестики");
+            } else {
+                gameStep.setText("Нолики");
+            }
+            pack();
+            locked = false;
         } else {
-            gameStep.setText("Нолики");
+            nextAIStep();
         }
-        pack();
-        locked = false;
     }
 
-    public void endGame(boolean hasWinner) {
-        if (hasWinner) {
-            if (gameStep.getText().equals("Нолики")) {
-                winnerLabel.setText("Победа за нулями!");
-                nullWinCount++;
-                nullWinCountLabel.setText(String.valueOf(nullWinCount));
-            } else {
-                winnerLabel.setText("Победа за крестами!");
-                crossWinCount++;
-                crossWinCountLabel.setText(String.valueOf(crossWinCount));
-            }
+    public void nextAIStep() {
+        if (gameAgainstAI) {
+            locked = false;
         } else {
-            winnerLabel.setText("Ничья!");
+            nextStep();
         }
+    }
+
+    public void endGameWithWinner(String winner) {
+        if (winner.equals("Nulls")) {
+            winnerLabel.setText("Победа за нулями!");
+            nullWinCount++;
+            nullWinCountLabel.setText(String.valueOf(nullWinCount));
+        } else if (winner.equals("Crosses")) {
+            winnerLabel.setText("Победа за крестами!");
+            crossWinCount++;
+            crossWinCountLabel.setText(String.valueOf(crossWinCount));
+        }
+        endGamePanel.setVisible(true);
+        pack();
+        locked = true;
+    }
+
+    public void endGameWithoutWinner() {
+        winnerLabel.setText("Ничья!");
         endGamePanel.setVisible(true);
         pack();
         locked = true;
@@ -121,9 +136,14 @@ public class Main_Board extends JFrame {
 
     private void newGame() {
         if (gameAgainstAI) {
-            ModelNotifier.startNewGame(gameType, gameDifficulty);
+            ModelNotifier.startNewGame(gameDifficulty, gameType);
         } else {
             ModelNotifier.startNewGame(gameType);
+        }
+        if (winnerLabel.getText().equals("Победа за нулями!")) {
+            gameStep.setText("Нолики");
+        } else if (winnerLabel.getText().equals("Победа за крестами!")) {
+            gameStep.setText("Крестики");
         }
         endGamePanel.setVisible(false);
         setLabelVisibility(gameType, true, true);
@@ -247,6 +267,9 @@ public class Main_Board extends JFrame {
     private void setGameBoard(String gameType) {
         this.gameType = gameType;
         this.gameAgainstAI = withAI.isSelected();
+        if (gameAgainstAI) {
+            step.setText("Шаг игрока:");
+        } else step.setText("Сейчас ходят:");
         gameDifficulty = (String) gamediffBox.getSelectedItem();
         gameDifficulty = (String) gamediffBox.getSelectedItem();
         controlPanel.setVisible(false);

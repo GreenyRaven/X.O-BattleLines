@@ -23,11 +23,16 @@ public class ViewUpdater {
                 }
             }
         }
-        View.endGame(true);
+        String winner = "";
+        switch (withStatus) {
+            case "Cross_Diagonal_LD", "Cross_Diagonal_RD", "Cross_Horizontal", "Cross_Vertical" -> winner = "Crosses";
+            case "Null_Diagonal_LD", "Null_Diagonal_RD", "Null_Horizontal", "Null_Vertical" -> winner = "Nulls";
+        }
+        View.endGameWithWinner(winner);
     }
 
     public void endThisGameWithoutWinner() {
-        View.endGame(false);
+        View.endGameWithoutWinner();
     }
 
     public void makeAIStep(int toIndex, String withStatus) {
@@ -36,6 +41,6 @@ public class ViewUpdater {
                 CardCollection.GameBoard.updateCards(new CardCollection.Card[]{card}, withStatus);
             }
         }
-        View.nextStep();
+        View.nextAIStep();
     }
 }
