@@ -116,6 +116,7 @@ public class Main_Board extends JFrame {
         }
         endGamePanel.setVisible(true);
         pack();
+        locked = true;
     }
 
     private void newGame() {
