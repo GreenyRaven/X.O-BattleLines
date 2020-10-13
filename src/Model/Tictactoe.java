@@ -54,36 +54,45 @@ public class Tictactoe {
         try {
             turn(index, gameStep);// now i have: player , row , col
             place(this.board, this.player, this.row, this.col);
+            System.out.println("Player: " + this.player);// 1-x 2-o
             System.out.println("Turn: " + Arrays.deepToString(this.board));
-            UIUpdater.toNextStep();
+            System.out.println("------");
+            if (!win_and_draw_check()){
+                UIUpdater.toNextStep();
+            }else{
+                return;
+            }
 //        temporary !
-            switch (aiDifficulty) {
-                case "Hard" -> {
-                    placeAI(this.board, this.player);
-                    System.out.println("Turn AI hard: " + Arrays.deepToString(this.board));
-                    encode_ai_fig();
-                    if (this.player == 1) {
-                        this.player = 2;
-                    } else {
-                        this.player = 1;
-                    }
-                    UIUpdater.makeAIStep(this.ai_move, this.ai_fig);
-                    win_and_draw_check();
+            if ("Hard".equals(aiDifficulty)) {
+                if (this.player == 1) {//del
+                    this.player = 2;
+                } else {
+                    this.player = 1;
                 }
-                case "Easy" -> {
-                    random_placement(this.board, this.player);
-                    System.out.println("Turn AI ez: " + Arrays.deepToString(this.board));
-                    encode_ai_fig();
+                placeAI(this.board, this.player);//player = gameStep
+                System.out.println("Turn AI hard: " + Arrays.deepToString(this.board));
+                encode_ai_fig();
+                UIUpdater.makeAIStep(this.ai_move, this.ai_fig);
+                win_and_draw_check();
+            } else if ("Low".equals(aiDifficulty)) {
+
+
+                if (!win_and_draw_check()){
                     if (this.player == 1) {
                         this.player = 2;
                     } else {
                         this.player = 1;
                     }
-                    UIUpdater.makeAIStep(this.ai_move, this.ai_fig);
+                    random_placement(this.board, this.player);
+                    System.out.println("Turn AI low: " + Arrays.deepToString(this.board));
+                    System.out.println("----ai----");
+                    encode_ai_fig();
+                    UIUpdater.makeAIStep(this.ai_move, this.ai_fig);//тут уже toNextstep
                     win_and_draw_check();
+                }else{
+                    return;
                 }
             }
-            win_and_draw_check();
         } catch (Exception ignored) {
         }
     }
@@ -160,7 +169,7 @@ public class Tictactoe {
         if (placement[0] == 2 && placement[1] == 0) {
             this.ai_move = 6;
         }
-        if (placement[0] == 2 && placement[1] == 2) {
+        if (placement[0] == 2 && placement[1] == 1) {
             this.ai_move = 7;
         }
         if (placement[0] == 2 && placement[1] == 2) {
@@ -179,62 +188,61 @@ public class Tictactoe {
 
     // encode won_place
     private void won_place() {
-        switch (this.num_row) {
-            case 0 -> {
-                this.won = new int[]{0, 1, 2};
-                if (this.player == 1) {
-                    this.img = "Cross_Horizontal";
-                } else {
-                    this.img = "Null_Horizontal";
-                }
+        if (this.board[0][0] == this.player && this.board[0][1] == this.player && this.board[0][2] == this.player) {
+            this.won = new int[]{0, 1, 2};
+            if (this.player == 1) {
+                this.img = "Cross_Horizontal";
+                return;
+            } else {
+                this.img = "Null_Horizontal";
             }
-            case 1 -> {
-                this.won = new int[]{3, 4, 5};
-                if (this.player == 1) {
-                    this.img = "Cross_Horizontal";
-                } else {
-                    this.img = "Null_Horizontal";
-                }
+        } else if (this.num_row == 1) {
+            this.won = new int[]{3, 4, 5};
+            if (this.player == 1) {
+                this.img = "Cross_Horizontal";
+                return;
+            } else {
+                this.img = "Null_Horizontal";
             }
-            case 2 -> {
-                this.won = new int[]{6, 7, 8};
-                if (this.player == 1) {
-                    this.img = "Cross_Horizontal";
-                } else {
-                    this.img = "Null_Horizontal";
-                }
+        } else if (this.num_row == 2) {
+            this.won = new int[]{6, 7, 8};
+            if (this.player == 1) {
+                this.img = "Cross_Horizontal";
+                return;
+            } else {
+                this.img = "Null_Horizontal";
             }
         }
-        switch (this.num_col) {
-            case 0 -> {
-                this.won = new int[]{0, 3, 6};
-                if (this.player == 1) {
-                    this.img = "Cross_Vertical";
-                } else {
-                    this.img = "Null_Vertical";
-                }
+        if (this.board[0][0] == this.player && this.board[1][0] == this.player && this.board[2][0] == this.player) {
+            this.won = new int[]{0, 3, 6};
+            if (this.player == 1) {
+                this.img = "Cross_Vertical";
+                return;
+            } else {
+                this.img = "Null_Vertical";
             }
-            case 1 -> {
-                this.won = new int[]{1, 4, 7};
-                if (this.player == 1) {
-                    this.img = "Cross_Vertical";
-                } else {
-                    this.img = "Null_Vertical";
-                }
+        } else if (this.num_col == 1) {
+            this.won = new int[]{1, 4, 7};
+            if (this.player == 1) {
+                this.img = "Cross_Vertical";
+                return;
+            } else {
+                this.img = "Null_Vertical";
             }
-            case 2 -> {
-                this.won = new int[]{2, 5, 8};
-                if (this.player == 1) {
-                    this.img = "Cross_Vertical";
-                } else {
-                    this.img = "Null_Vertical";
-                }
+        } else if (this.num_col == 2) {
+            this.won = new int[]{2, 5, 8};
+            if (this.player == 1) {
+                this.img = "Cross_Vertical";
+                return;
+            } else {
+                this.img = "Null_Vertical";
             }
         }
         if (this.diag_princ == 1) {
             this.won = new int[]{0, 4, 8};
             if (this.player == 1) {
                 this.img = "Cross_Diagonal_RD";
+                return;
             } else {
                 this.img = "Null_Diagonal_RD";
             }
@@ -243,6 +251,7 @@ public class Tictactoe {
             this.won = new int[]{2, 4, 6};
             if (this.player == 1) {
                 this.img = "Cross_Diagonal_LD";
+                return;
             } else {
                 this.img = "Null_Diagonal_LD";
             }
@@ -419,15 +428,18 @@ public class Tictactoe {
         return false;
     }
 
-    private void win_and_draw_check() {
+    private boolean win_and_draw_check() {
         if (win_check(this.board, player)) {
             System.out.println("Player " + this.player + " won!");
             won_place();// now i have: won , img
-            UIUpdater.endThisGameWithWinner(this.won, img);
+            UIUpdater.endThisGameWithWinner(this.won, this.img);
+            return true;
         } else if (possibilities(this.board).isEmpty()) {
             System.out.println("No one won!");
             UIUpdater.endThisGameWithoutWinner();
+            return true;
         }
+        return false;
     }
 
 }
