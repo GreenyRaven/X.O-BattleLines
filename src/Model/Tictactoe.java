@@ -63,35 +63,29 @@ public class Tictactoe {
                 return;
             }
 //        temporary !
-            if ("Hard".equals(aiDifficulty)) {
-                if (this.player == 1) {//del
+            if ("High".equals(aiDifficulty)) {
+                if (this.player == 1) {
                     this.player = 2;
                 } else {
                     this.player = 1;
                 }
-                placeAI(this.board, this.player);//player = gameStep
+                placeAI(this.board, this.player);
                 System.out.println("Turn AI hard: " + Arrays.deepToString(this.board));
                 encode_ai_fig();
                 UIUpdater.makeAIStep(this.ai_move, this.ai_fig);
                 win_and_draw_check();
             } else if ("Low".equals(aiDifficulty)) {
-
-
-                if (!win_and_draw_check()){
-                    if (this.player == 1) {
-                        this.player = 2;
-                    } else {
-                        this.player = 1;
-                    }
-                    random_placement(this.board, this.player);
-                    System.out.println("Turn AI low: " + Arrays.deepToString(this.board));
-                    System.out.println("----ai----");
-                    encode_ai_fig();
-                    UIUpdater.makeAIStep(this.ai_move, this.ai_fig);//тут уже toNextstep
-                    win_and_draw_check();
-                }else{
-                    return;
+                if (this.player == 1) {
+                    this.player = 2;
+                } else {
+                    this.player = 1;
                 }
+                random_placement(this.board, this.player);
+                System.out.println("Turn AI low: " + Arrays.deepToString(this.board));
+                System.out.println("----ai----");
+                encode_ai_fig();
+                UIUpdater.makeAIStep(this.ai_move, this.ai_fig);
+                win_and_draw_check();
             }
         } catch (Exception ignored) {
         }
@@ -251,7 +245,6 @@ public class Tictactoe {
             this.won = new int[]{2, 4, 6};
             if (this.player == 1) {
                 this.img = "Cross_Diagonal_LD";
-                return;
             } else {
                 this.img = "Null_Diagonal_LD";
             }
@@ -279,12 +272,12 @@ public class Tictactoe {
         Attribute p7 = new Attribute("p7");
         Attribute p8 = new Attribute("p8");
 
-        ArrayList<String> labels = new ArrayList<String>();
+        ArrayList<String> labels = new ArrayList<>();
         labels.add("0");
         labels.add("1");
         labels.add("2");
         Attribute cls = new Attribute("class", labels);
-        ArrayList<Attribute> attributes = new ArrayList<Attribute>();
+        ArrayList<Attribute> attributes = new ArrayList<>();
         attributes.add(p0);
         attributes.add(p1);
         attributes.add(p2);
@@ -323,7 +316,7 @@ public class Tictactoe {
 
             double clsLabel = mlp.classifyInstance(dataset.lastInstance());// who is winning?
             double[] dist_labels = mlp.distributionForInstance(dataset.lastInstance());
-            System.out.println("Current move: " + possible_move);
+            System.out.println("Current move: " + Arrays.toString(possible_move));
             System.out.println("Class label: " + clsLabel);
             System.out.println("Distribution for classes: " + Utils.arrayToString(dist_labels));
 
