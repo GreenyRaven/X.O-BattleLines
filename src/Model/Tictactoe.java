@@ -63,7 +63,7 @@ public class Tictactoe {
                 return;
             }
 //        temporary !
-            if ("High".equals(aiDifficulty)) {
+            if ("Hard".equals(aiDifficulty)) {
                 if (this.player == 1) {
                     this.player = 2;
                 } else {
@@ -74,7 +74,7 @@ public class Tictactoe {
                 encode_ai_fig();
                 UIUpdater.makeAIStep(this.ai_move, this.ai_fig);
                 win_and_draw_check();
-            } else if ("Low".equals(aiDifficulty)) {
+            } else if ("Easy".equals(aiDifficulty)) {
                 if (this.player == 1) {
                     this.player = 2;
                 } else {

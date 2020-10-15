@@ -271,7 +271,6 @@ public class Main_Board extends JFrame {
             step.setText("Шаг игрока:");
         } else step.setText("Сейчас ходят:");
         gameDifficulty = (String) gamediffBox.getSelectedItem();
-        gameDifficulty = (String) gamediffBox.getSelectedItem();
         controlPanel.setVisible(false);
         endGamePanel.setVisible(false);
         crossWinCountLabel.setText("0");

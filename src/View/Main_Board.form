@@ -612,9 +612,8 @@
             </constraints>
             <properties>
               <model>
-                <item value="Low"/>
-                <item value="Medium"/>
-                <item value="High"/>
+                <item value="Easy"/>
+                <item value="Hard"/>
               </model>
             </properties>
           </component>
