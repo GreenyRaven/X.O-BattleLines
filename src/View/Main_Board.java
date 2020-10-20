@@ -87,6 +87,7 @@ public class Main_Board extends JFrame {
         gameDiffLabel.setVisible(false);
         gamediffBox.setVisible(false);
         pack();
+        setLocation(300,300);
         setVisible(true);
     }
 
@@ -139,11 +140,6 @@ public class Main_Board extends JFrame {
             ModelNotifier.startNewGame(gameDifficulty, gameType);
         } else {
             ModelNotifier.startNewGame(gameType);
-        }
-        if (winnerLabel.getText().equals("Победа за нулями!")) {
-            gameStep.setText("Нолики");
-        } else if (winnerLabel.getText().equals("Победа за крестами!")) {
-            gameStep.setText("Крестики");
         }
         endGamePanel.setVisible(false);
         setLabelVisibility(gameType, true, true);
